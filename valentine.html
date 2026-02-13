@@ -482,7 +482,8 @@
                 style="font-weight:800;color:#555;font-size:13px">Danh hiệu:
                 Chưa chơi</div>
               <div class="misses" id="misses"
-                style="font-weight:800;color:#ef4444;font-size:13px">Lỡ hụt: 0/10</div>
+                style="font-weight:800;color:#ef4444;font-size:13px">Lỡ hụt:
+                0/10</div>
               <div class="actions" style="justify-content:flex-start">
                 <button class="btn primary"
                   style="padding:8px 18px;font-size:13px"
@@ -888,17 +889,17 @@
     document.getElementById('btnShakeJar').addEventListener('click', ()=>{
       jar.classList.remove('shake'); void jar.offsetWidth; jar.classList.add('shake');
       playSfx('shake');
-      shakeCount++;
-      const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
-      if(hitKey){
-        hasCandyKey = true;
-        candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
-        playSfx('win');
-        burstConfetti(22);
-      } else {
-        candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
-      }
-      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      // shakeCount++;
+      // const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
+      // if(hitKey){
+      //   hasCandyKey = true;
+      //   candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
+      //   playSfx('win');
+      //   burstConfetti(22);
+      // } else {
+      //   candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      // }
+      // refreshUnlockChecklist(pw.value === CARD_PASSWORD);
       saveProgress();
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
@@ -1151,7 +1152,7 @@
         ? `<div style="margin-top:14px;padding:14px;border-radius:12px;background:#fff5f8;border:1px dashed #ff4d8d;color:#555;line-height:1.7"><b style="color:#d6336c">🤫 Bí mật của anh:</b><br/>Bí mật của anh chính là ảnh của em anh chưa xóa :&gt; sao xóa được kho báu của anh chứ hehe 📸💎</div>`
         : '';
       showModal('💌 Lá thư dành cho em', `
-        <div style="max-height:65vh;overflow:auto;padding:16px;border-radius:14px;background:#fff;border:1px solid #ffe0ea;line-height:1.8;color:#444">
+        <div style="max-height:50vh;overflow:auto;padding:16px;border-radius:14px;background:#fff;border:1px solid #ffe0ea;line-height:1.8;color:#444">
           ${letterMain.innerHTML}
           ${secretVisible}
         </div>
