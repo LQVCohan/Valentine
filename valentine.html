@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Valentine 14/02 💘</title>
-  <style>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Valentine 14/02 💘</title>
+    <style>
     :root{
       --bg1:#fff0f6; --bg2:#ffe3ed; --card:#ffffffcc;
       --text:#1f2937; --muted:#6b7280;
@@ -209,230 +209,263 @@
     .unlockReq ul{margin:0;padding-left:18px;color:#6b7280;font-weight:700;font-size:13px;line-height:1.6}
     .unlockReq .ok{color:#0f9d58}
   </style>
-</head>
-<body>
-  <div class="hearts" id="bgHearts" aria-hidden="true"></div>
-  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  </head>
+  <body>
+    <div class="hearts" id="bgHearts" aria-hidden="true"></div>
+    <div class="confetti" id="confetti" aria-hidden="true"></div>
 
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="badge">💘</div>
-        <div>
-          <div>Valentine 14/02</div>
-          <div class="tiny">Gửi em yêu — từ <b>anh</b> ❤️</div>
-        </div>
-      </div>
-      <div class="actions">
-        <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
-        <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
-      </div>
-    </header>
-
-    <section class="hero" aria-label="Lời chúc">
-      <div class="left">
-        <div class="kicker">✨ Một chiếc web nhỏ cho em</div>
-        <h1>Chúc em một Valentine thật ngọt ngào 💞</h1>
-        <p class="sub">
-          Anh làm trang này để em vừa xem ảnh, vừa chơi vài trò “cute phô mai que”,
-          và quan trọng nhất là… để em biết rằng <b>anh thương em rất nhiều</b>.
-        </p>
-        <div class="actions" style="justify-content:flex-start">
-          <button class="btn primary" id="btnLoveQuiz">🧠 Quiz tình yêu</button>
-          <button class="btn ghost" id="btnCandy">🍬 Hũ kẹo lời khen</button>
-          <button class="btn ghost" id="btnGame">❤️ Bắt tim</button>
-        </div>
-        <div class="chips">
-          <span class="chip">#em_là_đặc_biệt</span>
-          <span class="chip">#anh_luôn_ở_đây</span>
-          <span class="chip">#hôm_nay_em_xinh</span>
-        </div>
-      </div>
-      <div class="right">
-        <div class="teddyCloud" aria-hidden="true">
-          <div class="spark s1">✨</div><div class="spark s2">✨</div><div class="spark s3">✨</div><div class="spark s4">✨</div>
-          <div class="teddy t1">🧸</div>
-          <div class="teddy t2">🧸</div>
-          <div class="teddy t3">🧸</div>
-        </div>
-        <div class="heroNote">Tip: bấm “Mở quà” để nhận bất ngờ nho nhỏ 😚</div>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card" id="galleryCard">
-        <h2>📸 Album “Em là yêu thương”</h2>
-        <p>Ảnh đã được chỉnh lại để mặt rõ hơn và không dính UI. Bấm vào ảnh để phóng to nhé.</p>
-        <div class="gallery" id="gallery">
-          <img class="shot" src="Ảnh/01.jpg" alt="Ảnh 1" data-full="Ảnh/01.jpg">
-          <img class="shot" src="Ảnh/02.jpg" alt="Ảnh 2" data-full="Ảnh/02.jpg">
-          <img class="shot" src="Ảnh/03.jpg" alt="Ảnh 3" data-full="Ảnh/03.jpg">
-          <img class="shot" src="Ảnh/04.jpg" alt="Ảnh 4" data-full="Ảnh/04.jpg">
-          <img class="shot" src="Ảnh/05.jpg" alt="Ảnh 5" data-full="Ảnh/05.jpg">
-          <img class="shot" src="Ảnh/06.jpg" alt="Ảnh 6" data-full="Ảnh/06.jpg">
-        </div>
-      </div>
-
-      <div class="card" id="candyCard">
-        <h2>🍬 Hũ kẹo lời khen</h2>
-        <p>Bốc 1 viên kẹo là nhận 1 lời khen. Lắc hũ là kẹo “rơi lộp bộp” trong tim anh 😳</p>
-
-        <div class="jarWrap">
-          <div class="jar" id="jar">
-            <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Hũ kẹo">
-              <defs>
-                <linearGradient id="gGlass" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
-                  <stop offset=".55" stop-color="#ffffff" stop-opacity=".35"/>
-                  <stop offset="1" stop-color="#ffffff" stop-opacity=".75"/>
-                </linearGradient>
-                <linearGradient id="gLid" x1="0" x2="1">
-                  <stop offset="0" stop-color="#ff4d8d"/>
-                  <stop offset="1" stop-color="#ff86b4"/>
-                </linearGradient>
-                <linearGradient id="gShine" x1="0" x2="1">
-                  <stop offset="0" stop-color="#fff" stop-opacity=".0"/>
-                  <stop offset=".35" stop-color="#fff" stop-opacity=".65"/>
-                  <stop offset="1" stop-color="#fff" stop-opacity=".0"/>
-                </linearGradient>
-              </defs>
-              <rect x="50" y="18" rx="16" ry="16" width="100" height="34" fill="url(#gLid)"/>
-              <rect x="58" y="8" rx="18" ry="18" width="84" height="24" fill="url(#gLid)" opacity=".92"/>
-              <path d="M55 58 C50 80, 45 110, 48 160 C51 206, 74 222, 100 224 C126 222, 149 206, 152 160 C155 110, 150 80, 145 58 Z"
-                    fill="url(#gGlass)" stroke="rgba(255,77,141,.35)" stroke-width="2"/>
-              <g opacity=".95">
-                <circle cx="78" cy="115" r="12" fill="#ff4d8d"/>
-                <circle cx="110" cy="130" r="12" fill="#ff86b4"/>
-                <circle cx="92" cy="150" r="12" fill="#ff4d8d"/>
-                <circle cx="120" cy="155" r="12" fill="#ffd1e4"/>
-                <circle cx="78" cy="170" r="12" fill="#ff86b4"/>
-                <circle cx="108" cy="178" r="12" fill="#ff4d8d"/>
-              </g>
-              <path d="M78 66 C64 98, 62 130, 64 164 C66 192, 76 208, 84 214"
-                    fill="none" stroke="url(#gShine)" stroke-width="10" stroke-linecap="round" opacity=".85"/>
-              <ellipse cx="100" cy="232" rx="60" ry="10" fill="rgba(31,41,55,.10)"/>
-            </svg>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="badge">💘</div>
+          <div>
+            <div>Valentine 14/02</div>
+            <div class="tiny">Gửi em yêu — từ <b>anh</b> ❤️</div>
           </div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
+          <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
+        </div>
+      </header>
 
-          <div class="candyLine">
-            <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
-            <div class="actions" style="justify-content:flex-start">
-              <button class="btn primary" id="btnPickCandy">🍬 Bốc kẹo</button>
-              <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
+      <section class="hero" aria-label="Lời chúc">
+        <div class="left">
+          <div class="kicker">✨ Một chiếc web nhỏ cho em</div>
+          <h1>Chúc em một Valentine thật ngọt ngào 💞</h1>
+          <p class="sub">
+            Anh làm trang này để em vừa xem ảnh, vừa chơi vài trò “cute phô mai
+            que”,
+            và quan trọng nhất là… để em biết rằng <b>anh thương em rất
+              nhiều</b>.
+          </p>
+          <div class="actions" style="justify-content:flex-start">
+            <button class="btn primary" id="btnLoveQuiz">🧠 Quiz tình
+              yêu</button>
+            <button class="btn ghost" id="btnCandy">🍬 Hũ kẹo lời khen</button>
+            <button class="btn ghost" id="btnGame">❤️ Bắt tim</button>
+          </div>
+          <div class="chips">
+            <span class="chip">#em_là_đặc_biệt</span>
+            <span class="chip">#anh_luôn_ở_đây</span>
+            <span class="chip">#hôm_nay_em_xinh</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="teddyCloud" aria-hidden="true">
+            <div class="spark s1">✨</div><div class="spark s2">✨</div><div
+              class="spark s3">✨</div><div class="spark s4">✨</div>
+            <div class="teddy t1">🧸</div>
+            <div class="teddy t2">🧸</div>
+            <div class="teddy t3">🧸</div>
+          </div>
+          <div class="heroNote">Tip: bấm “Mở quà” để nhận bất ngờ nho nhỏ
+            😚</div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card" id="galleryCard">
+          <h2>📸 Album “Em là yêu thương”</h2>
+          <p>Ảnh đã được chỉnh lại để mặt rõ hơn và không dính UI. Bấm vào ảnh
+            để phóng to nhé.</p>
+          <div class="gallery" id="gallery">
+            <img class="shot" src="Ảnh/01.jpg" alt="Ảnh 1"
+              data-full="Ảnh/01.jpg">
+            <img class="shot" src="Ảnh/02.jpg" alt="Ảnh 2"
+              data-full="Ảnh/02.jpg">
+            <img class="shot" src="Ảnh/03.jpg" alt="Ảnh 3"
+              data-full="Ảnh/03.jpg">
+            <img class="shot" src="Ảnh/04.jpg" alt="Ảnh 4"
+              data-full="Ảnh/04.jpg">
+            <img class="shot" src="Ảnh/05.jpg" alt="Ảnh 5"
+              data-full="Ảnh/05.jpg">
+            <img class="shot" src="Ảnh/06.jpg" alt="Ảnh 6"
+              data-full="Ảnh/06.jpg">
+          </div>
+        </div>
+
+        <div class="card" id="candyCard">
+          <h2>🍬 Hũ kẹo lời khen</h2>
+          <p>Bốc 1 viên kẹo là nhận 1 lời khen. Lắc hũ là kẹo “rơi lộp bộp”
+            trong tim anh 😳</p>
+
+          <div class="jarWrap">
+            <div class="jar" id="jar">
+              <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
+                aria-label="Hũ kẹo">
+                <defs>
+                  <lineargradient id="gGlass" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#ffffff" stop-opacity=".85" />
+                    <stop offset=".55" stop-color="#ffffff"
+                      stop-opacity=".35" />
+                    <stop offset="1" stop-color="#ffffff" stop-opacity=".75" />
+                  </lineargradient>
+                  <lineargradient id="gLid" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ff4d8d" />
+                    <stop offset="1" stop-color="#ff86b4" />
+                  </lineargradient>
+                  <lineargradient id="gShine" x1="0" x2="1">
+                    <stop offset="0" stop-color="#fff" stop-opacity=".0" />
+                    <stop offset=".35" stop-color="#fff" stop-opacity=".65" />
+                    <stop offset="1" stop-color="#fff" stop-opacity=".0" />
+                  </lineargradient>
+                </defs>
+                <rect x="50" y="18" rx="16" ry="16" width="100" height="34"
+                  fill="url(#gLid)" />
+                <rect x="58" y="8" rx="18" ry="18" width="84" height="24"
+                  fill="url(#gLid)" opacity=".92" />
+                <path
+                  d="M55 58 C50 80, 45 110, 48 160 C51 206, 74 222, 100 224 C126 222, 149 206, 152 160 C155 110, 150 80, 145 58 Z"
+                  fill="url(#gGlass)" stroke="rgba(255,77,141,.35)"
+                  stroke-width="2" />
+                <g opacity=".95">
+                  <circle cx="78" cy="115" r="12" fill="#ff4d8d" />
+                  <circle cx="110" cy="130" r="12" fill="#ff86b4" />
+                  <circle cx="92" cy="150" r="12" fill="#ff4d8d" />
+                  <circle cx="120" cy="155" r="12" fill="#ffd1e4" />
+                  <circle cx="78" cy="170" r="12" fill="#ff86b4" />
+                  <circle cx="108" cy="178" r="12" fill="#ff4d8d" />
+                </g>
+                <path d="M78 66 C64 98, 62 130, 64 164 C66 192, 76 208, 84 214"
+                  fill="none" stroke="url(#gShine)" stroke-width="10"
+                  stroke-linecap="round" opacity=".85" />
+                <ellipse cx="100" cy="232" rx="60" ry="10"
+                  fill="rgba(31,41,55,.10)" />
+              </svg>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="card" id="quizCard">
-        <h2>🧠 Quiz tình yêu</h2>
-        <p>Trả lời nhanh cho vui. Cuối quiz có “phần thưởng” nha!</p>
-        <div class="actions" style="justify-content:flex-start; margin-top:10px">
-          <button class="btn primary" id="btnStartQuiz">Bắt đầu</button>
-        </div>
-      </div>
-
-      <div class="card" id="gameCard">
-        <h2>❤️ Mini game: Bắt tim</h2>
-        <p>
-          Bấm tim rơi xuống để ghi điểm. Có hiệu ứng “bắt trúng” và “tim vỡ” nếu bỏ lỡ.
-          <br/>Mốc 30 tim sẽ mở <b>bí mật</b> trong tấm thiệp 💌
-        </p>
-
-        <div class="game">
-          <div class="progressWrap">
-            <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng bắt tim 💗</div>
-            <div class="progressBar" aria-hidden="true">
-              <div class="progressFill" id="gameProgressFill"></div>
-            </div>
-          </div>
-          <div class="gameTop">
-            <div class="score" id="score">Điểm: 0</div>
-            <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
-            <div class="actions" style="justify-content:flex-start">
-              <button class="btn primary" id="btnPlay">Chơi</button>
-              <button class="btn ghost" id="btnStop">Dừng</button>
-            </div>
-          </div>
-          <div class="playfield" id="playfield" aria-label="Khu vực chơi">
-            <div class="ground"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="valCardWrap" id="letterCard">
-      <div class="valCard">
-        <div class="valTop">
-          <div style="display:flex;gap:10px;align-items:center">
-            <div class="seal">💌</div>
-            <div>
-              <div style="font-weight:900;color:#8a1747">Thiệp bí mật của anh</div>
-              <div class="tiny">Nhập đúng mật khẩu thì lá thư sẽ “trượt” ra 🥺</div>
-            </div>
-          </div>
-          <button class="btn ghost" id="btnScrollGame">🎮 Tới mini game</button>
-        </div>
-
-        <div class="valBody">
-          <div class="envelope" aria-label="Thiệp và phong thư">
-            <div class="envPaper"></div>
-            <div class="envBody"></div>
-            <div class="envFlap"></div>
-            <div class="envSealWax" aria-hidden="true"></div>
-            <div class="letter" id="letter">
-              <h3>Lá thư dành cho em 💗</h3>
-              <p id="letterMain">
-                Em à, nếu em đang đọc tới đây thì chắc là… em đã mở đúng chiếc thiệp anh gửi rồi.
-                Anh không giỏi nói điều to tát, nhưng anh muốn em biết: <b>anh trân trọng em</b> và luôn muốn em vui.
-              </p>
-
-              <div class="secret" id="secretBox">
-                <div class="secretTitle">🔐 Bí mật (mở khi đạt 30 tim)</div>
-                <div style="color:#6b7280;font-weight:700;line-height:1.6">
-                  <b>[BÍ MẬT CỦA NGƯỜI CON TRAI]</b><br/>
-                  (Anh tự chỉnh đoạn này sau nhé 😚)
-                </div>
+            <div class="candyLine">
+              <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
+              <div class="actions" style="justify-content:flex-start">
+                <button class="btn primary" id="btnPickCandy">🍬 Bốc
+                  kẹo</button>
+                <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="pwRow">
-            <input class="inp" id="pw" placeholder="Nhập mật khẩu..." autocomplete="off" />
-            <button class="btn primary" id="btnOpenLetter">Mở thiệp</button>
+        <div class="card" id="quizCard">
+          <h2>🧠 Quiz tình yêu</h2>
+          <p>Trả lời nhanh cho vui. Cuối quiz có “phần thưởng” nha!</p>
+          <div class="actions"
+            style="justify-content:flex-start; margin-top:10px">
+            <button class="btn primary" id="btnStartQuiz">Bắt đầu</button>
           </div>
-          <div class="unlockReq" id="unlockReq">
-            <div class="title">Điều kiện mở thư cuối:</div>
-            <ul>
-              <li id="reqPw">❌ Nhập đúng mật khẩu</li>
-              <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
-              <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
-              <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
-            </ul>
+        </div>
+
+        <div class="card" id="gameCard">
+          <h2>❤️ Mini game: Bắt tim</h2>
+          <p>
+            Bấm tim rơi xuống để ghi điểm. Có hiệu ứng “bắt trúng” và “tim vỡ”
+            nếu bỏ lỡ.
+            <br />Mốc 30 tim sẽ mở <b>bí mật</b> trong tấm thiệp 💌
+          </p>
+
+          <div class="game">
+            <div class="progressWrap">
+              <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng
+                bắt tim 💗</div>
+              <div class="progressBar" aria-hidden="true">
+                <div class="progressFill" id="gameProgressFill"></div>
+              </div>
+            </div>
+            <div class="gameTop">
+              <div class="score" id="score">Điểm: 0</div>
+              <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
+              <div class="actions" style="justify-content:flex-start">
+                <button class="btn primary" id="btnPlay">Chơi</button>
+                <button class="btn ghost" id="btnStop">Dừng</button>
+              </div>
+            </div>
+            <div class="playfield" id="playfield" aria-label="Khu vực chơi">
+              <div class="ground"></div>
+            </div>
           </div>
-          <div class="hint">Gợi ý: mật khẩu là thứ mà “anh biết em sẽ nhớ” 😌</div>
+        </div>
+      </section>
+
+      <section class="valCardWrap" id="letterCard">
+        <div class="valCard">
+          <div class="valTop">
+            <div style="display:flex;gap:10px;align-items:center">
+              <div class="seal">💌</div>
+              <div>
+                <div style="font-weight:900;color:#8a1747">Thiệp bí mật của
+                  anh</div>
+                <div class="tiny">Nhập đúng mật khẩu thì lá thư sẽ “trượt” ra
+                  🥺</div>
+              </div>
+            </div>
+            <button class="btn ghost" id="btnScrollGame">🎮 Tới mini
+              game</button>
+          </div>
+
+          <div class="valBody">
+            <div class="envelope" aria-label="Thiệp và phong thư">
+              <div class="envPaper"></div>
+              <div class="envBody"></div>
+              <div class="envFlap"></div>
+              <div class="envSealWax" aria-hidden="true"></div>
+              <div class="letter" id="letter">
+                <h3>Lá thư dành cho em 💗</h3>
+                <p id="letterMain">
+                  Em à, nếu em đang đọc tới đây thì chắc là… em đã mở đúng chiếc
+                  thiệp anh gửi rồi.
+                  Anh không giỏi nói điều to tát, nhưng anh muốn em biết: <b>anh
+                    trân trọng em</b> và luôn muốn em vui.
+                </p>
+
+                <div class="secret" id="secretBox">
+                  <div class="secretTitle">🔐 Bí mật (mở khi đạt 30 tim)</div>
+                  <div style="color:#6b7280;font-weight:700;line-height:1.6">
+                    <b>[BÍ MẬT CỦA NGƯỜI CON TRAI]</b><br />
+                    (Anh tự chỉnh đoạn này sau nhé 😚)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pwRow">
+              <input class="inp" id="pw" placeholder="Nhập mật khẩu..."
+                autocomplete="off" />
+              <button class="btn primary" id="btnOpenLetter">Mở thiệp</button>
+            </div>
+            <div class="unlockReq" id="unlockReq">
+              <div class="title">Điều kiện mở thư cuối:</div>
+              <ul>
+                <li id="reqPw">❌ Nhập đúng mật khẩu</li>
+                <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
+                <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
+                <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
+              </ul>
+            </div>
+            <div class="hint">Gợi ý: mật khẩu là thứ mà “anh biết em sẽ nhớ”
+              😌</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal" id="modal" role="dialog" aria-modal="true"
+      aria-labelledby="modalTitle">
+      <div class="backdrop" id="modalBackdrop"></div>
+      <div class="dialog" role="document">
+        <div class="dialogTop">
+          <h3 id="modalTitle">Modal</h3>
+          <button class="close" id="modalClose" aria-label="Đóng">✕</button>
+        </div>
+        <div class="content" id="modalBody"></div>
+        <div class="foot">
+          <button class="btn primary" id="modalOk">OK</button>
         </div>
       </div>
-    </section>
-  </div>
-
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="backdrop" id="modalBackdrop"></div>
-    <div class="dialog" role="document">
-      <div class="dialogTop">
-        <h3 id="modalTitle">Modal</h3>
-        <button class="close" id="modalClose" aria-label="Đóng">✕</button>
-      </div>
-      <div class="content" id="modalBody"></div>
-      <div class="foot">
-        <button class="btn primary" id="modalOk">OK</button>
-      </div>
     </div>
-  </div>
 
-  <audio id="bgm" preload="auto" loop></audio>
+    <audio id="bgm" preload="auto" loop></audio>
 
-  <script>
+    <script>
     const CARD_PASSWORD = "CohanXGinn";
 
     (function spawnBgHearts(){
@@ -494,7 +527,7 @@
     });
 
     const compliments = [
-      "Hôm nay em xinh quá trời luôn 🫶",
+      "Hôm nay em xinh quá trời luôn 😍",
       "Nụ cười của em làm anh mềm tim 😳",
       "Ở cạnh em, mọi thứ đều nhẹ nhàng hơn 💗",
       "Em đáng yêu kiểu… không ai đỡ nổi 🥺",
@@ -800,5 +833,5 @@
       setTimeout(()=> layer.classList.remove('show'), 2800);
     }
   </script>
-</body>
+  </body>
 </html>
