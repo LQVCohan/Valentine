@@ -217,6 +217,7 @@
         transition: transform 0.1s;
     }
     .tapHeart:active { transform: scale(0.9); }
+    .tapHeart.missed { pointer-events: none; opacity: 0.75; }
 
     /* Letter */
     .valCardWrap { margin-top: 40px; }
@@ -480,6 +481,8 @@
               <div class="rank" id="rank"
                 style="font-weight:800;color:#555;font-size:13px">Danh hiệu:
                 Chưa chơi</div>
+              <div class="misses" id="misses"
+                style="font-weight:800;color:#ef4444;font-size:13px">Lỡ hụt: 0/10</div>
               <div class="actions" style="justify-content:flex-start">
                 <button class="btn primary"
                   style="padding:8px 18px;font-size:13px"
@@ -578,9 +581,10 @@
              .envBody:before { left:0; transform-origin: bottom left; transform: skewY(15deg); border-top-left-radius: 8px; }
              .envBody:after { right:0; transform-origin: bottom right; transform: skewY(-15deg); border-top-right-radius: 8px; }
              
+             .envelope.opened { cursor: pointer; }
              .envelope.opened .envFlap { transform: rotateX(180deg); z-index: 1; opacity: 0; }
              .envelope.opened .envSealWax { opacity:0; transform: scale(1.5); pointer-events:none }
-             .letter.open { transform: translateY(0); opacity:1; z-index: 5; }
+             .letter.peek { transform: translateY(56%); opacity:1; z-index: 5; pointer-events:none; overflow:hidden; }
             </style>
             </div>
 
@@ -615,7 +619,7 @@
 
     <div class="modal" id="modal" role="dialog" aria-modal="true"
       aria-labelledby="modalTitle"
-      style="position:fixed;inset:0;display:none;z-index:999;">
+      style="position:fixed;inset:0;z-index:999;">
       <div class="backdrop" id="modalBackdrop"
         style="position:absolute;inset:0;"></div>
       <div class="dialog" role="document"
@@ -634,6 +638,7 @@
         </div>
       </div>
       <style>
+          .modal { display: none; }
           .modal.show { display: block; }
           @keyframes popd { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
       </style>
@@ -767,10 +772,12 @@
     const modalOk    = document.getElementById('modalOk');
     const modalClose = document.getElementById('modalClose');
     const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalDialog = modal.querySelector('.dialog');
 
-    function showModal(title, html){
+    function showModal(title, html, {wide = false} = {}){
       modalTitle.textContent = title || "Thông báo";
       modalBody.innerHTML = html || "";
+      modalDialog.style.width = wide ? 'min(760px, 94vw)' : 'min(500px, 90vw)';
       modal.classList.add('show');
       setTimeout(()=>modalOk.focus(), 10);
       playSfx('pop'); 
@@ -882,16 +889,16 @@
       jar.classList.remove('shake'); void jar.offsetWidth; jar.classList.add('shake');
       playSfx('shake');
       shakeCount++;
-      // const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
-      // if(hitKey){
-      //   hasCandyKey = true;
-      //   candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
-      //   playSfx('win');
-      //   burstConfetti(22);
-      // } else {
-      //   candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
-      // }
-      // refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
+      if(hitKey){
+        hasCandyKey = true;
+        candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
+        playSfx('win');
+        burstConfetti(22);
+      } else {
+        candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      }
+      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
       saveProgress();
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
@@ -962,10 +969,13 @@
     const playfield = document.getElementById('playfield');
     const scoreEl = document.getElementById('score');
     const rankEl = document.getElementById('rank');
+    const missesEl = document.getElementById('misses');
     const gameProgressText = document.getElementById('gameProgressText');
     const gameProgressFill = document.getElementById('gameProgressFill');
     let playing = false;
     let score = 0;
+    let misses = 0;
+    let gameOver = false;
     let spawner = null;
 
     let secretUnlocked = false;
@@ -1008,6 +1018,23 @@
       }
     }
 
+    function handleGameOver(){
+      if(gameOver) return;
+      gameOver = true;
+      stopGame({
+        showSummary:false,
+        statusText:`Bé trượt ${misses}/10 tim rồi nè 🥺 Game dừng lại để ôm bé một cái.`,
+      });
+      playSfx('wrong');
+      showModal('😿 Ooops, thua mất rồi!', `
+        <div style="text-align:center">
+          <div style="font-size:52px;line-height:1">🧸💔</div>
+          <div style="margin-top:10px;font-weight:900;color:#d6336c;font-size:18px">Em đã hụt 10 trái tim</div>
+          <div style="margin-top:8px;color:#666">Không sao nha, bấm <b>Chơi</b> để bắt đầu lại ván mới 💗</div>
+        </div>
+      `);
+    }
+
     function popAt(x,y,emoji){
       const p = document.createElement('div');
       p.className = 'pop';
@@ -1044,7 +1071,7 @@
       let hit = false;
 
       const clickHandler = (ev) => {
-          if(hit) return;
+          if(hit || !playing || gameOver) return;
           hit = true;
           score++;
           bestHeartScore = Math.max(bestHeartScore, score);
@@ -1068,7 +1095,15 @@
       h.addEventListener('touchstart', clickHandler, {passive: true});
 
       h.addEventListener('animationend', ()=>{
-        if(!hit) breakAt(x);
+        if(!hit){
+          h.classList.add('missed');
+          breakAt(x);
+          if(playing && !gameOver){
+            misses += 1;
+            missesEl.textContent = `Lỡ hụt: ${misses}/10`;
+            if(misses >= 10) handleGameOver();
+          }
+        }
         h.remove();
       });
 
@@ -1088,7 +1123,10 @@
       if(playing) return;
       playing = true;
       score = 0;
+      misses = 0;
+      gameOver = false;
       scoreEl.textContent = "Điểm: 0";
+      missesEl.textContent = "Lỡ hụt: 0/10";
       updateGameProgress(0, {persistAchievement:false});
       setRank(0);
       spawner = setInterval(spawnTapHeart, 420);
@@ -1097,14 +1135,33 @@
       playSfx('tada');
     }
 
-    function stopGame(){
+    function stopGame({showSummary = true, statusText = null} = {}){
       playing = false;
       if(spawner) clearInterval(spawner);
       spawner = null;
       [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
-      gameProgressText.textContent = `Stopppp. Thành tích: ${score} tim 💗`;
-      burstConfetti(22);
+      gameProgressText.textContent = statusText || `Stopppp. Thành tích: ${score} tim 💗`;
+      if(showSummary) burstConfetti(22);
       saveProgress();
+    }
+
+    function openLetterFullModal(){
+      const letterMain = document.getElementById('letterMain');
+      const secretVisible = gameGoalReached
+        ? `<div style="margin-top:14px;padding:14px;border-radius:12px;background:#fff5f8;border:1px dashed #ff4d8d;color:#555;line-height:1.7"><b style="color:#d6336c">🤫 Bí mật của anh:</b><br/>Bí mật của anh chính là ảnh của em anh chưa xóa :&gt; sao xóa được kho báu của anh chứ hehe 📸💎</div>`
+        : '';
+      showModal('💌 Lá thư dành cho em', `
+        <div style="max-height:65vh;overflow:auto;padding:16px;border-radius:14px;background:#fff;border:1px solid #ffe0ea;line-height:1.8;color:#444">
+          ${letterMain.innerHTML}
+          ${secretVisible}
+        </div>
+      `, {wide:true});
+    }
+
+    function setLetterPeekState(opened){
+      envelope.classList.toggle('opened', opened);
+      letter.classList.toggle('peek', opened);
+      letter.classList.remove('open');
     }
 
     document.getElementById('btnPlay').addEventListener('click', startGame);
@@ -1120,17 +1177,19 @@
     const pw = document.getElementById('pw');
     const letter = document.getElementById('letter');
     const envelope = document.querySelector('.envelope');
+    envelope.addEventListener('click', ()=>{
+      if(letterOpened) openLetterFullModal();
+    });
     document.getElementById('btnOpenLetter').addEventListener('click', ()=>{
       const isPwOk = pw.value === CARD_PASSWORD;
       refreshUnlockChecklist(isPwOk);
       if(isPwOk && quizPassed && hasCandyKey && gameGoalReached){
-        letter.classList.add('open');
-        envelope.classList.add('opened');
+        setLetterPeekState(true);
         letterOpened = true;
         saveProgress();
         burstConfetti(20);
         playSfx('win'); 
-        showModal("💌 Mở thiệp thành công", "Anh biết em làm được mà 😚");
+        openLetterFullModal();
       } else {
         playSfx('wrong');
         showModal("🔒 Chưa mở được thư", "Cần nhập đúng mật khẩu và hoàn thành đủ 3 minigame để mở thư cuối nha em 💗");
@@ -1142,6 +1201,7 @@
     function applyProgressToUi(){
       if(hasCandyKey) candyOut.textContent = "🔑 Em đã có chìa khóa rồi, mở thư thôi nào!";
       scoreEl.textContent = "Điểm: " + bestHeartScore;
+      missesEl.textContent = "Lỡ hụt: 0/10";
       setRank(bestHeartScore);
       updateGameProgress(bestHeartScore, {persistAchievement:false});
       if(gameGoalReached){
@@ -1149,8 +1209,7 @@
         secretBox.classList.add('show');
       }
       if(letterOpened){
-        letter.classList.add('open');
-        envelope.classList.add('opened');
+        setLetterPeekState(true);
       }
       refreshUnlockChecklist(pw.value === CARD_PASSWORD);
     }
@@ -1168,13 +1227,16 @@
       letterOpened = false;
       secretUnlocked = false;
       score = 0;
+      misses = 0;
+      gameOver = false;
       candyOut.textContent = "Bấm “Bốc kẹo” đi em 😚";
       gameProgressFill.style.width = '0%';
       gameProgressText.textContent = 'Tiến độ: sẵn sàng bắt tim 💗';
       scoreEl.textContent = 'Điểm: 0';
+      missesEl.textContent = 'Lỡ hụt: 0/10';
       setRank(0);
       secretBox.classList.remove('show');
-      letter.classList.remove('open');
+      letter.classList.remove('peek');
       envelope.classList.remove('opened');
       pw.value = '';
       localStorage.removeItem(PROGRESS_STORAGE_KEY);
