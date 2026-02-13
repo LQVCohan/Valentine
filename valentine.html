@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="vi">
   <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>14/02 💘 For Ginn</title>
@@ -13,31 +12,33 @@
 
     <style>
     :root{
-      /* Bảng màu mới sang trọng hơn */
+      /* Bảng màu tinh chỉnh lại: Dịu mắt và sang trọng hơn */
       --primary: #ff3366; 
-      --primary-light: #ff6699;
-      --primary-dark: #cc0044;
-      --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-      --glass: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.8);
-      --glass-shadow: 0 8px 32px 0 rgba(255, 51, 102, 0.15);
-      --text-main: #4a4a4a;
+      --primary-light: #ff85a2;
+      --primary-dark: #c01b4e;
+      --accent: #ffebf0;
+      
+      /* Glassmorphism cao cấp hơn */
+      --glass: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.9);
+      --glass-shadow: 0 12px 40px -5px rgba(255, 51, 102, 0.15);
+      
+      --text-main: #594a4e;
       --text-highlight: #d6336c;
-      --radius: 24px;
+      --radius: 28px;
     }
 
     *{box-sizing:border-box}
     
     body{
       margin:0;
-      font-family: 'Nunito', sans-serif; /* Font tròn trịa dễ thương */
+      font-family: 'Nunito', sans-serif;
       color: var(--text-main);
-      /* Nền động đẹp mắt */
-      background-color: #ffdee9;
-      background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
-      background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      /* Nền gradient pastel nhẹ nhàng */
+      background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+      background-image: linear-gradient(135deg, #fff0f3 0%, #ffe3ec 50%, #e3f2fd 100%);
       background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
+      animation: gradientBG 20s ease infinite;
       min-height: 100vh;
       overflow-x:hidden;
     }
@@ -48,231 +49,230 @@
       100% {background-position: 0% 50%;}
     }
 
-    /* Scrollbar đẹp */
-    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 51, 102, 0.3); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 51, 102, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 51, 102, 0.2); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 51, 102, 0.5); }
 
-    /* Hiệu ứng Floating hearts background */
+    /* Hearts Background mờ ảo hơn */
     .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
     .heart{
       position:absolute;
-      width:22px;
+      width:20px;
       aspect-ratio:1;
-      background:linear-gradient(145deg, #ff8fb3, #ff3366);
+      background: #ff8fb3;
       clip-path:path('M12 21C11 20 3 14 3 8a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 6-8 12-9 13Z');
-      opacity:.45;
+      opacity:0.3;
       animation:floatUp linear infinite;
-      filter:drop-shadow(0 2px 6px rgba(255, 51, 102, .28));
-      transform-origin:center;
     }
     @keyframes floatUp{
-        0%{transform:translateY(110vh) scale(0.85) rotate(-6deg); opacity:0;}
-        20%{opacity:0.65;}
-        100%{transform:translateY(-20vh) scale(1.2) rotate(8deg); opacity:0;}
+        0%{transform:translateY(110vh) scale(0.8); opacity:0;}
+        20%{opacity:0.5;}
+        100%{transform:translateY(-10vh) scale(1.1); opacity:0;}
     }
 
-    .wrap{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:20px 20px 80px;}
+    .wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:20px 20px 80px;}
 
-    /* Header Glassmorphism */
+    /* Header */
     header{
-      position: sticky; top: 10px; z-index: 100;
-      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;
+      position: sticky; top: 15px; z-index: 100;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.9);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.03);
       transition: all 0.3s ease;
     }
-    header:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 51, 102, 0.15); }
+    header:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 0.9); }
 
     .brand{display:flex;align-items:center;gap:12px;}
     .badge{
-        display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;
-        border-radius:50%; background: linear-gradient(135deg, #ff6b6b, #ff3366);
-        color:white;font-size:22px; box-shadow: 0 4px 10px rgba(255,51,102,0.4);
-        animation: pulseHeart 2s infinite;
+        display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+        border-radius:50%; background: #ff3366;
+        color:white;font-size:20px; box-shadow: 0 4px 12px rgba(255,51,102,0.3);
     }
-    @keyframes pulseHeart { 0%{transform:scale(1)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
-    
-    .brand-text { font-family: 'Pacifico', cursive; font-size: 20px; color: var(--primary-dark); }
+    .brand-text { font-family: 'Pacifico', cursive; font-size: 22px; color: var(--primary-dark); }
     .tiny{display: block; font-family: 'Nunito', sans-serif; color:var(--text-main);font-size:12px; font-weight: 700;}
 
-    /* Buttons Upgrade */
+    /* Buttons */
     .btn{
-        border:none; padding:10px 20px; border-radius:50px; cursor:pointer; font-weight:800; font-family: 'Nunito', sans-serif;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display:inline-flex; align-items:center; gap:8px; font-size: 15px;
+        border:none; padding:12px 24px; border-radius:50px; cursor:pointer; font-weight:800; font-family: 'Nunito', sans-serif;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); display:inline-flex; align-items:center; gap:8px; font-size: 14px;
+        letter-spacing: 0.3px;
     }
     .btn.primary{
-        background: linear-gradient(135deg, #ff6b6b 0%, #ff3366 100%); color:white;
-        box-shadow: 0 4px 15px rgba(255, 51, 102, 0.4);
+        background: linear-gradient(135deg, #ff3366 0%, #ff5c8d 100%); color:white;
+        box-shadow: 0 8px 20px -4px rgba(255, 51, 102, 0.4);
     }
-    .btn.primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 51, 102, 0.6); filter: brightness(1.1); }
-    .btn.ghost{ background: rgba(255,255,255,0.9); color: var(--text-highlight); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    .btn.ghost:hover{ background: #fff; transform: translateY(-2px); color: var(--primary); }
+    .btn.primary:hover{ transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px -4px rgba(255, 51, 102, 0.5); }
+    .btn.primary:active{ transform: scale(0.95); }
+    
+    .btn.ghost{ background: rgba(255,255,255,0.7); color: var(--text-highlight); border: 1px solid rgba(255,255,255,1); }
+    .btn.ghost:hover{ background: #fff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-    /* Cards Global Style */
+    /* Cards */
     .card, .hero, .valCard {
         background: var(--glass);
-        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
         border: 1px solid var(--glass-border);
         border-radius: var(--radius);
         box-shadow: var(--glass-shadow);
         overflow: hidden;
         transition: transform 0.3s ease;
     }
-
-    /* Hero Section */
+    
+    /* Hero Section Refined */
     .hero{
-        margin-top:30px; display:grid; grid-template-columns: 1.2fr 0.8fr; gap:0;
-        background: rgba(255,255,255,0.6);
+        margin-top:35px; display:grid; grid-template-columns: 1.1fr 0.9fr; gap:0;
+        background: rgba(255,255,255,0.5);
     }
-    @media (max-width: 820px){.hero{grid-template-columns:1fr}}
+    @media (max-width: 820px){.hero{grid-template-columns:1fr; padding-bottom: 40px;}}
 
-    .hero .left{padding: 40px;}
+    .hero .left{padding: 40px 40px 50px;}
     .kicker{
-        display:inline-block; padding:6px 16px; background: #ffe0e9; 
+        display:inline-block; padding:8px 18px; background: #fff0f3; 
         border-radius:20px; font-weight:800; color: var(--primary-dark); 
-        font-size:13px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;
+        font-size:12px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;
+        border: 1px solid #ffdeeb;
     }
-    h1{
-        font-family: 'Pacifico', cursive; font-size: clamp(32px, 5vw, 54px);
-        margin: 10px 0 20px; line-height: 1.2;
-        background: linear-gradient(45deg, #ff3366, #ff9966);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    
+    /* FIX H1: Đẹp hơn, dễ đọc hơn */
+    h1 {
+        font-family: 'Pacifico', cursive; 
+        font-size: clamp(36px, 6vw, 58px);
+        margin: 5px 0 20px; 
+        line-height: 1.25;
+        color: #d61c4e; /* Màu hồng đậm solid */
+        text-shadow: 3px 3px 0px #fff, 0px 4px 15px rgba(214, 28, 78, 0.15); /* Tạo khối và bóng nhẹ */
+        position: relative;
+        z-index: 2;
     }
-    .sub{font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 25px;}
-    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top: 20px;}
-    .chip{background: #fff; border:1px solid #ffccdd; padding:6px 14px; border-radius:20px; color: var(--primary); font-weight:700; font-size: 13px;}
+
+    .sub{font-size: 17px; line-height: 1.7; color: #555; margin-bottom: 30px; max-width: 90%;}
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top: 25px;}
+    .chip{background: #fff; border:1px solid #ffeef2; padding:8px 16px; border-radius:20px; color: var(--primary); font-weight:700; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
 
     .hero .right{
-        position:relative; min-height:300px; display:flex; align-items:center; justify-content:center;
-        background: radial-gradient(circle at center, rgba(255,255,255,0.8), transparent);
+        position:relative; min-height:320px; display:flex; align-items:center; justify-content:center;
     }
     
-    /* Teddy Animation Refined */
-    .teddyCloud { position:relative; width: 300px; height: 260px; }
-    .teddy { position: absolute; font-size: 80px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); transition: all 0.3s ease; }
-    .teddy:hover { transform: scale(1.1) rotate(10deg) !important; cursor: grab; }
-    .teddy.t1 { left: 10%; top: 10%; animation: floatItem 3s ease-in-out infinite; }
-    .teddy.t2 { left: 50%; top: 30%; font-size: 90px; animation: floatItem 4s ease-in-out infinite 0.5s; z-index: 2; }
-    .teddy.t3 { left: 25%; top: 55%; font-size: 70px; animation: floatItem 3.5s ease-in-out infinite 1s; }
+    /* FIX TEDDY: SVG Gấu dễ thương hơn */
+    .teddy-scene { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+    .teddy-svg { width: 280px; height: auto; filter: drop-shadow(0 15px 25px rgba(180, 50, 80, 0.15)); animation: floatBear 4s ease-in-out infinite; }
+    .heart-float { position: absolute; font-size: 24px; animation: floatHearts 3s ease-in infinite; opacity: 0; }
     
-    @keyframes floatItem { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+    @keyframes floatBear { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-20px) rotate(2deg)} }
+    @keyframes floatHearts { 0%{transform:translateY(0);opacity:0} 20%{opacity:1} 100%{transform:translateY(-80px);opacity:0} }
 
     .heroNote{
-        position:absolute; bottom:20px; left:20px; right:20px;
-        background: rgba(255,255,255,0.9); padding:10px; border-radius:12px;
+        position:absolute; bottom:25px; left:50%; transform: translateX(-50%);
+        background: #fff; padding:8px 20px; border-radius:30px;
         font-size: 13px; color: var(--primary-dark); font-weight: 700; text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 1px solid #ffeeee; white-space: nowrap;
     }
 
     /* Grid Layout */
     .grid{margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:24px;}
     @media (max-width: 820px){.grid{grid-template-columns:1fr}}
 
-    .card { padding: 24px; }
+    .card { padding: 30px; }
     .card h2 { 
-        font-family: 'Pacifico', cursive; color: var(--primary-dark); margin: 0 0 10px; font-size: 26px; 
+        font-family: 'Pacifico', cursive; color: var(--primary-dark); margin: 0 0 10px; font-size: 28px; 
     }
-    .card p { color: #666; font-size: 15px; margin-bottom: 20px; }
+    .card p { color: #666; font-size: 15px; margin-bottom: 25px; line-height: 1.6; }
 
-    /* Gallery Upgrade */
-    .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    /* Gallery Polish */
+    .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
     .shot{
         width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px;
-        cursor:pointer; transition: all 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        border: 2px solid #fff;
+        cursor:pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: 4px solid #fff; /* Hiệu ứng khung ảnh */
+        background: #fff;
     }
-    .shot:hover{ transform: scale(1.05) rotate(-2deg); z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .shot:hover{ transform: scale(1.08) rotate(-2deg); z-index: 2; box-shadow: 0 15px 30px rgba(0,0,0,0.15); border-color: #fff0f5; }
 
     /* Candy Jar */
     .jarWrap{ display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; }
     .candyOut{
-        background: #fff; padding: 15px; border-radius: 16px; border: 2px dashed #ffccdd;
+        background: #fff; padding: 15px 25px; border-radius: 20px; border: 2px dashed #ffccdd;
         text-align: center; font-weight: 800; color: var(--text-highlight); min-height: 60px;
-        display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 10px rgba(255,240,245,0.5);
+        display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(255,240,245,0.5);
     }
     .shake { animation: shakeJar 0.5s cubic-bezier(.36,.07,.19,.97) both; }
     @keyframes shakeJar { 10%, 90% { transform: translate3d(-1px, 0, 0) rotate(-2deg); } 20%, 80% { transform: translate3d(2px, 0, 0) rotate(2deg); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0) rotate(-4deg); } 40%, 60% { transform: translate3d(4px, 0, 0) rotate(4deg); } }
 
     /* Game Area */
-    .game { background: #fff; padding: 15px; border-radius: 20px; border: 1px solid #f0f0f0; }
+    .game { background: #fff; padding: 20px; border-radius: 24px; border: 1px solid #fff5f8; box-shadow: inset 0 0 20px rgba(0,0,0,0.01); }
     .playfield {
-        background: radial-gradient(circle at center, #fff0f5 0%, #ffeef2 100%);
-        border: 2px solid #fff; box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+        background: radial-gradient(circle at center, #fffbfc 0%, #fff0f5 100%);
+        border: 2px solid #fff; 
+        border-radius: 16px;
     }
     .tapHeart { 
-        display:grid;
-        place-items:center;
-        font-size: 30px;
-        line-height:1;
-        user-select:none;
-        filter: drop-shadow(0 4px 6px rgba(255,50,100,0.35)); 
+        display:grid; place-items:center; font-size: 32px; line-height:1;
+        user-select:none; filter: drop-shadow(0 4px 6px rgba(255,50,100,0.25)); 
         transition: transform 0.1s;
     }
-    .tapHeart:active { transform: scale(0.88) !important; }
+    .tapHeart:active { transform: scale(0.9); }
 
-    /* Letter & Envelope - High Quality Look */
+    /* Letter */
     .valCardWrap { margin-top: 40px; }
-    .valCard { padding: 0; }
-    .valTop { padding: 20px; background: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); display: flex; justify-content: space-between; align-items: center; }
+    .valCard { padding: 0; border: 1px solid rgba(255,255,255,0.8); }
+    .valTop { padding: 25px; background: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.5); display: flex; justify-content: space-between; align-items: center; }
     
     .seal {
-        width: 50px; height: 50px; background: linear-gradient(135deg, #d92f73, #ff6aa2);
-        color: white; border-radius: 50%; display: grid; place-items: center; font-size: 24px;
-        box-shadow: 0 5px 15px rgba(217, 47, 115, 0.4); border: 2px solid #fff;
+        width: 54px; height: 54px; background: linear-gradient(135deg, #ff3366, #ff6b8b);
+        color: white; border-radius: 50%; display: grid; place-items: center; font-size: 26px;
+        box-shadow: 0 8px 20px rgba(255, 51, 102, 0.3); border: 3px solid #fff;
     }
 
-    .valBody { padding: 30px; background: rgba(255,245,248,0.4); }
+    .valBody { padding: 40px; background: rgba(255,250,252,0.5); }
 
     .envelope {
-        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        background: linear-gradient(135deg, #fff0f5 0%, #ffdeeb 100%);
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        background: linear-gradient(135deg, #fff5f8 0%, #ffebf2 100%);
     }
-    /* Wax Seal refined */
     .envSealWax {
-        background: radial-gradient(circle at 30% 30%, #ff5e62, #ff9966);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.5);
-        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        background: radial-gradient(circle at 35% 35%, #e11d48, #be123c);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.4);
+        border: 1px solid #9f1239;
     }
     
     .letter { 
         font-family: 'Nunito', sans-serif; 
-        background-image: linear-gradient(#fff 23px, #f0f0f0 24px, #fff 25px); /* Lined paper effect */
-        background-size: 100% 25px;
+        background-color: #fff;
+        background-image: repeating-linear-gradient(#fff 0px, #fff 24px, #e5e5e5 25px);
         line-height: 25px;
         padding: 30px; 
+        border: 1px solid #eee;
     }
     .letter h3 { font-family: 'Pacifico', cursive; font-size: 24px; margin-bottom: 20px; color: var(--primary-dark); background: none; }
-    .letter p { margin-bottom: 25px; color: #444; font-weight: 600; }
+    .letter p { margin-bottom: 25px; color: #444; font-weight: 600; font-size: 15px; }
 
-    /* Password Input */
-    .pwRow { display:flex; gap:10px; margin-top: 20px; }
+    /* Inputs */
+    .pwRow { display:flex; gap:12px; margin-top: 25px; }
     .inp {
-        flex:1; padding: 12px 20px; border-radius: 50px; border: 2px solid #ffccdd;
-        outline: none; font-size: 16px; font-weight: 700; color: var(--primary);
-        transition: border-color 0.3s;
+        flex:1; padding: 14px 24px; border-radius: 50px; border: 2px solid #ffdae5;
+        outline: none; font-size: 16px; font-weight: 700; color: var(--primary-dark); background: rgba(255,255,255,0.8);
+        transition: all 0.3s;
     }
-    .inp:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 51, 102, 0.1); }
+    .inp:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 51, 102, 0.1); background: #fff; }
 
-    /* Modal Styling */
-    .backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
+    /* Modal */
+    .backdrop { background: rgba(50, 20, 30, 0.4); backdrop-filter: blur(8px); }
     .dialog {
-        border-radius: 24px; border: 1px solid rgba(255,255,255,0.9);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border-radius: 28px; border: 1px solid rgba(255,255,255,1);
+        box-shadow: 0 40px 60px -10px rgba(0, 0, 0, 0.15);
+        background: #fff;
     }
-    .dialogTop h3 { font-family: 'Pacifico', cursive; font-size: 24px; color: var(--primary); }
-    .close { background: #f0f0f0; transition: all 0.2s; }
-    .close:hover { background: #ffccd5; color: #d6336c; }
+    .dialogTop h3 { font-family: 'Pacifico', cursive; font-size: 26px; color: var(--primary); }
+    .close { background: #f5f5f5; color: #888; transition: all 0.2s; font-weight: bold;}
+    .close:hover { background: #ffe0e6; color: #d6336c; }
 
-    /* General Animations */
-    .fade-in-up { animation: fadeInUp 0.8s ease forwards; opacity: 0; transform: translateY(20px); }
+    .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(30px); }
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
     </style>
@@ -294,7 +294,7 @@
         <div class="actions">
           <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
           <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
-          <button class="btn ghost" id="btnReset">♻️ Reset Game</button>
+          <button class="btn ghost" id="btnReset">♻️ Reset</button>
         </div>
       </header>
 
@@ -302,7 +302,8 @@
         aria-label="Lời chúc">
         <div class="left">
           <div class="kicker">✨ Một chiếc web nhỏ cho em</div>
-          <h1>Chúc em một Valentine thật ngọt ngào 💞</h1>
+          <h1>Chúc em một Valentine thật ngọt ngào</h1>
+          <h2> </h2>
           <p class="sub">
             Anh làm trang này để em vừa xem ảnh, vừa chơi vài trò vui vui,
             và quan trọng nhất là… để em biết rằng <b>anh thương em rất
@@ -321,12 +322,37 @@
           </div>
         </div>
         <div class="right">
-          <div class="teddyCloud" aria-hidden="true">
-            <div class="spark s1">✨</div><div class="spark s2">✨</div><div
-              class="spark s3">✨</div>
-            <div class="teddy t1">🧸</div>
-            <div class="teddy t2">🧸</div>
-            <div class="teddy t3">🧸</div>
+          <div class="teddy-scene" aria-hidden="true">
+            <svg class="teddy-svg" viewBox="0 0 200 200"
+              xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(100, 110)">
+                <circle cx="-35" cy="-45" r="15" fill="#d97706" />
+                <circle cx="35" cy="-45" r="15" fill="#d97706" />
+                <circle cx="-35" cy="-45" r="7" fill="#fcd34d" />
+                <circle cx="35" cy="-45" r="7" fill="#fcd34d" />
+                <ellipse cx="0" cy="-10" rx="55" ry="48" fill="#fbbf24" />
+                <circle cx="-20" cy="-15" r="5" fill="#374151" />
+                <circle cx="20" cy="-15" r="5" fill="#374151" />
+                <ellipse cx="-35" cy="-5" rx="8" ry="5" fill="#fca5a5"
+                  opacity="0.6" />
+                <ellipse cx="35" cy="-5" rx="8" ry="5" fill="#fca5a5"
+                  opacity="0.6" />
+                <ellipse cx="0" cy="5" rx="22" ry="16" fill="#fef3c7" />
+                <ellipse cx="0" cy="0" rx="8" ry="5" fill="#451a03" />
+                <path d="M-5 10 Q0 15 5 10" stroke="#451a03" stroke-width="2"
+                  fill="none" />
+                <ellipse cx="-40" cy="40" rx="15" ry="12" fill="#fbbf24"
+                  transform="rotate(-20)" />
+                <ellipse cx="40" cy="40" rx="15" ry="12" fill="#fbbf24"
+                  transform="rotate(20)" />
+                <path d="M0 30 C-20 10 -40 40 0 70 C40 40 20 10 0 30"
+                  fill="#ff3366" stroke="#be123c" stroke-width="2" />
+              </g>
+              <text x="20" y="40" fill="#ff6b6b" font-size="20"
+                class="heart-float" style="animation-delay:0s">❤</text>
+              <text x="160" y="60" fill="#ff6b6b" font-size="16"
+                class="heart-float" style="animation-delay:1.5s">❤</text>
+            </svg>
           </div>
           <div class="heroNote">Tip: bấm “Mở quà” để nhận bất ngờ nho nhỏ
             😚</div>
@@ -342,22 +368,22 @@
           <div class="gallery" id="gallery">
             <img class="shot" src="Ảnh/01.jpg" alt="Ảnh 1"
               data-full="Ảnh/01.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Anh+Em';this.parentElement.style.display='block'">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Love';this.parentElement.style.display='block'">
             <img class="shot" src="Ảnh/02.jpg" alt="Ảnh 2"
               data-full="Ảnh/02.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Love';">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=You';">
             <img class="shot" src="Ảnh/03.jpg" alt="Ảnh 3"
               data-full="Ảnh/03.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Cute';">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=So';">
             <img class="shot" src="Ảnh/04.jpg" alt="Ảnh 4"
               data-full="Ảnh/04.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Xinh';">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Much';">
             <img class="shot" src="Ảnh/05.jpg" alt="Ảnh 5"
               data-full="Ảnh/05.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Yeu';">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Bae';">
             <img class="shot" src="Ảnh/06.jpg" alt="Ảnh 6"
               data-full="Ảnh/06.jpg"
-              onerror="this.src='https://placehold.co/200x200/ffccd5/ff3366?text=Thuong';">
+              onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Cute';">
           </div>
         </div>
 
@@ -369,35 +395,41 @@
 
           <div class="jarWrap">
             <div class="jar" id="jar"
-              style="width:140px;height:180px;position:relative;filter:drop-shadow(0 10px 10px rgba(0,0,0,0.1))">
+              style="width:140px;height:180px;position:relative;filter:drop-shadow(0 15px 15px rgba(0,0,0,0.15))">
               <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg"
                 aria-label="Hũ kẹo">
                 <defs>
                   <lineargradient id="gGlass" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0" stop-color="#ffffff" stop-opacity=".9" />
-                    <stop offset=".5" stop-color="#ffffff" stop-opacity=".4" />
-                    <stop offset="1" stop-color="#ffffff" stop-opacity=".8" />
+                    <stop offset="0" stop-color="#ffffff" stop-opacity=".8" />
+                    <stop offset=".5" stop-color="#ffffff" stop-opacity=".3" />
+                    <stop offset="1" stop-color="#ffffff" stop-opacity=".6" />
                   </lineargradient>
                   <lineargradient id="gLid" x1="0" x2="1">
-                    <stop offset="0" stop-color="#ff4d8d" />
-                    <stop offset="1" stop-color="#ff86b4" />
+                    <stop offset="0" stop-color="#f43f5e" />
+                    <stop offset="1" stop-color="#fb7185" />
                   </lineargradient>
                 </defs>
-                <rect x="50" y="18" rx="16" ry="16" width="100" height="34"
+                <rect x="50" y="18" rx="8" ry="8" width="100" height="34"
                   fill="url(#gLid)" />
-                <rect x="58" y="8" rx="18" ry="18" width="84" height="24"
-                  fill="url(#gLid)" opacity=".92" />
+                <rect x="58" y="8" rx="8" ry="8" width="84" height="24"
+                  fill="url(#gLid)" opacity=".8" />
                 <path
                   d="M55 58 C50 80, 45 110, 48 160 C51 206, 74 222, 100 224 C126 222, 149 206, 152 160 C155 110, 150 80, 145 58 Z"
-                  fill="url(#gGlass)" stroke="rgba(255,255,255,.8)"
-                  stroke-width="3" />
+                  fill="url(#gGlass)" stroke="rgba(255,255,255,.9)"
+                  stroke-width="2" />
                 <g opacity=".95">
-                  <circle cx="78" cy="115" r="12" fill="#ff4d8d" />
-                  <circle cx="110" cy="130" r="12" fill="#ff86b4" />
-                  <circle cx="92" cy="150" r="12" fill="#ff4d8d" />
-                  <circle cx="120" cy="155" r="12" fill="#ffd1e4" />
-                  <circle cx="78" cy="170" r="12" fill="#ff86b4" />
-                  <circle cx="108" cy="178" r="12" fill="#ff4d8d" />
+                  <circle cx="78" cy="115" r="14" fill="#fb7185" stroke="#fff"
+                    stroke-width="2" />
+                  <circle cx="110" cy="130" r="14" fill="#f43f5e" stroke="#fff"
+                    stroke-width="2" />
+                  <circle cx="92" cy="150" r="14" fill="#fb7185" stroke="#fff"
+                    stroke-width="2" />
+                  <circle cx="120" cy="155" r="14" fill="#ffe4e6" stroke="#fff"
+                    stroke-width="2" />
+                  <circle cx="78" cy="170" r="14" fill="#f43f5e" stroke="#fff"
+                    stroke-width="2" />
+                  <circle cx="108" cy="178" r="14" fill="#fb7185" stroke="#fff"
+                    stroke-width="2" />
                 </g>
               </svg>
             </div>
@@ -430,35 +462,35 @@
 
           <div class="game">
             <div class="progressWrap"
-              style="background:#fff8fc;border-radius:12px;padding:9px 10px;margin-bottom:10px;border:1px solid #ffd1e4">
+              style="background:#fff0f5;border-radius:12px;padding:12px 14px;margin-bottom:15px;border:1px solid #ffd1e4">
               <div class="progressText" id="gameProgressText"
                 style="font-weight:800;color:#d6336c;font-size:13px;margin-bottom:8px">Tiến
                 độ: sẵn sàng bắt tim 💗</div>
               <div class="progressBar"
-                style="height:10px;background:#ffe3ef;border-radius:99px;overflow:hidden">
+                style="height:12px;background:#fff;border-radius:99px;overflow:hidden;border:1px solid #ffdae5">
                 <div class="progressFill" id="gameProgressFill"
                   style="height:100%;width:0%;background:linear-gradient(90deg,#ff4d8d,#ff86b4);transition:width .2s ease"></div>
               </div>
             </div>
             <div class="gameTop"
-              style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+              style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px;flex-wrap:wrap">
               <div class="score" id="score"
-                style="font-weight:900;color:#d6336c;background:#ffe7f1;padding:6px 14px;border-radius:99px">Điểm:
+                style="font-weight:900;color:#fff;background:#ff3366;padding:6px 16px;border-radius:99px;box-shadow:0 4px 10px rgba(255,51,102,0.3)">Điểm:
                 0</div>
               <div class="rank" id="rank"
-                style="font-weight:800;color:#4a4a4a;font-size:13px">Danh hiệu:
+                style="font-weight:800;color:#555;font-size:13px">Danh hiệu:
                 Chưa chơi</div>
               <div class="actions" style="justify-content:flex-start">
                 <button class="btn primary"
-                  style="padding:8px 16px;font-size:13px"
+                  style="padding:8px 18px;font-size:13px"
                   id="btnPlay">Chơi</button>
                 <button class="btn ghost"
-                  style="padding:8px 16px;font-size:13px"
+                  style="padding:8px 18px;font-size:13px"
                   id="btnStop">Dừng</button>
               </div>
             </div>
             <div class="playfield" id="playfield"
-              style="position:relative;height:280px;border-radius:14px;overflow:hidden;">
+              style="position:relative;height:300px;border-radius:16px;overflow:hidden;">
             </div>
           </div>
         </div>
@@ -468,10 +500,10 @@
         id="letterCard">
         <div class="valCard">
           <div class="valTop">
-            <div style="display:flex;gap:14px;align-items:center">
+            <div style="display:flex;gap:16px;align-items:center">
               <div class="seal">💌</div>
               <div>
-                <div style="font-weight:800;color:#b01b4c;font-size:18px">Thiệp
+                <div style="font-weight:800;color:#b01b4c;font-size:20px">Thiệp
                   bí mật</div>
                 <div class="tiny" style="color:#777">Nhập đúng mật khẩu để mở
                   thiệp nhé 😚</div>
@@ -482,21 +514,21 @@
 
           <div class="valBody">
             <div class="envelope" aria-label="Thiệp và phong thư"
-              style="position:relative;height:220px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.5)">
+              style="position:relative;height:240px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.8)">
               <div class="envPaper"
-                style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(255,255,255,.3) 0%, rgba(255,255,255,0) 100%);pointer-events:none;"></div>
+                style="position:absolute;inset:0;background:linear-gradient(135deg, rgba(255,255,255,.4) 0%, rgba(255,255,255,0.1) 100%);pointer-events:none;"></div>
 
               <div class="envBody"
                 style="position:absolute;inset:0;z-index:3;pointer-events:none;">
               </div>
               <div class="envFlap"
-                style="position:absolute;left:50%;top:0;z-index:6;transform:translateX(-50%);width:100%;height:70%;clip-path:polygon(50% 100%, 0 0, 100% 0);background:linear-gradient(180deg, #fff 0%, #ffe6f0 100%);border-bottom:1px solid rgba(0,0,0,0.05);transition:all 0.6s ease"></div>
+                style="position:absolute;left:50%;top:0;z-index:6;transform:translateX(-50%);width:100%;height:70%;clip-path:polygon(50% 100%, 0 0, 100% 0);background:linear-gradient(180deg, #fff 0%, #fff0f5 100%);border-bottom:1px solid rgba(0,0,0,0.05);transition:all 0.6s ease"></div>
 
               <div class="envSealWax" aria-hidden="true"
-                style="position:absolute;left:50%;top:44%;z-index:7;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:24px;transition:all 0.5s ease">❤</div>
+                style="position:absolute;left:50%;top:44%;z-index:7;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:26px;transition:all 0.5s ease">❤</div>
 
               <div class="letter" id="letter"
-                style="position:absolute;left:15px;right:15px;bottom:15px;top:15px;border-radius:10px;z-index:4;box-shadow:0 10px 30px rgba(0,0,0,0.1);transform:translateY(120%);opacity:0;transition:transform 0.8s cubic-bezier(.2,.9,.2,1), opacity 0.5s ease; overflow-y:auto;">
+                style="position:absolute;left:15px;right:15px;bottom:15px;top:15px;border-radius:6px;z-index:4;box-shadow:0 10px 30px rgba(0,0,0,0.1);transform:translateY(120%);opacity:0;transition:transform 0.8s cubic-bezier(.2,.9,.2,1), opacity 0.5s ease; overflow-y:auto;">
                 <h3>Lá thư dành cho em 💗</h3>
                 <p id="letterMain">
                   💌 Chào em cô gái bé bỏng của anh.<br /><br />
@@ -525,7 +557,7 @@
                 </p>
 
                 <div class="secret" id="secretBox"
-                  style="margin-top:15px;padding:15px;border-radius:12px;background:#fff0f7;border:1px dashed #ff4d8d;display:none">
+                  style="margin-top:15px;padding:20px;border-radius:12px;background:#fff5f8;border:1px dashed #ff4d8d;display:none">
                   <div class="secretTitle"
                     style="font-weight:900;color:#d6336c;margin-bottom:6px">🔐
                     Bí mật (mở khi đạt 30 tim)</div>
@@ -539,12 +571,12 @@
 
               <style>
              .envBody:before, .envBody:after {
-                 content:""; position:absolute; bottom:0; width:52%; height:80%;
-                 background: linear-gradient(160deg, #fff0f5, #ffd9e6);
-                 box-shadow: -2px -2px 10px rgba(0,0,0,0.05);
+                 content:""; position:absolute; bottom:0; width:54%; height:80%;
+                 background: linear-gradient(165deg, #fff0f6, #ffe4ef);
+                 box-shadow: -2px -2px 10px rgba(0,0,0,0.03);
              }
-             .envBody:before { left:0; transform-origin: bottom left; transform: skewY(15deg); border-top-left-radius: 10px; }
-             .envBody:after { right:0; transform-origin: bottom right; transform: skewY(-15deg); border-top-right-radius: 10px; }
+             .envBody:before { left:0; transform-origin: bottom left; transform: skewY(15deg); border-top-left-radius: 8px; }
+             .envBody:after { right:0; transform-origin: bottom right; transform: skewY(-15deg); border-top-right-radius: 8px; }
              
              .envelope.opened .envFlap { transform: rotateX(180deg); z-index: 1; opacity: 0; }
              .envelope.opened .envSealWax { opacity:0; transform: scale(1.5); pointer-events:none }
@@ -559,21 +591,21 @@
             </div>
 
             <div class="unlockReq" id="unlockReq"
-              style="margin-top:15px;padding:15px;border-radius:16px;background:rgba(255,255,255,0.6);border:1px solid #ffdae5">
+              style="margin-top:20px;padding:20px;border-radius:20px;background:rgba(255,255,255,0.7);border:1px solid #fff;">
               <div class="title"
-                style="font-weight:800;color:#d6336c;margin-bottom:8px">Điều
+                style="font-weight:800;color:#d6336c;margin-bottom:12px">Điều
                 kiện mở thư cuối:</div>
               <ul
-                style="margin:0;padding-left:20px;color:#555;font-size:14px;line-height:1.8">
+                style="margin:0;padding-left:20px;color:#555;font-size:14px;line-height:2">
                 <li id="reqPw">❌ Nhập đúng mật khẩu</li>
                 <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
                 <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
                 <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
               </ul>
-              <style>.unlockReq li.ok { color: #0f9d58; font-weight: 700; list-style-type: '✅  '; }</style>
+              <style>.unlockReq li.ok { color: #10b981; font-weight: 700; list-style-type: '✅  '; }</style>
             </div>
             <div class="hint"
-              style="text-align:center;margin-top:15px;color:#888;font-size:13px;font-style:italic">Gợi
+              style="text-align:center;margin-top:20px;color:#999;font-size:13px;font-style:italic">Gợi
               ý: mật khẩu là thứ mà anh biết em sẽ biết - Thứ anh luôn muốn từ
               em và chỉ em ( 4 chữ nhé, viết thường không dấu) 😌</div>
           </div>
@@ -587,23 +619,23 @@
       <div class="backdrop" id="modalBackdrop"
         style="position:absolute;inset:0;"></div>
       <div class="dialog" role="document"
-        style="position:relative;width:min(500px, 90vw);margin:10vh auto 0;background:#fff;padding:24px;animation:popd .3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        style="position:relative;width:min(500px, 90vw);margin:15vh auto 0;padding:30px;animation:popd .3s cubic-bezier(0.34, 1.56, 0.64, 1);">
         <div class="dialogTop"
-          style="display:flex;justify-content:space-between;margin-bottom:15px">
+          style="display:flex;justify-content:space-between;margin-bottom:15px;align-items:center">
           <h3 id="modalTitle" style="margin:0">Modal</h3>
           <button class="close" id="modalClose" aria-label="Đóng"
-            style="width:32px;height:32px;border-radius:50%;border:none;cursor:pointer">✕</button>
+            style="width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:16px">✕</button>
         </div>
         <div class="content" id="modalBody"
           style="color:#555;line-height:1.6"></div>
         <div class="foot"
-          style="display:flex;justify-content:flex-end;margin-top:20px">
+          style="display:flex;justify-content:flex-end;margin-top:25px">
           <button class="btn primary" id="modalOk">OK</button>
         </div>
       </div>
       <style>
           .modal.show { display: block; }
-          @keyframes popd { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
+          @keyframes popd { from{transform:scale(0.9);opacity:0} to{transform:scale(1);opacity:1} }
       </style>
     </div>
 
@@ -625,7 +657,6 @@
     const PROGRESS_STORAGE_KEY = "valentine_progress_v1";
     
     // --- CẤU HÌNH ÂM THANH OFFLINE (WEB AUDIO API) ---
-    // Lý do đổi: các URL âm thanh public thường bị chặn (403/CORS/proxy), gây im lặng toàn bộ.
     const AudioEngine = (()=>{
       let ctx = null;
       let master = null;
@@ -716,7 +747,7 @@
     }
     (function spawnBgHearts(){
       const wrap = document.getElementById('bgHearts');
-      const n = 25; // Increased hearts
+      const n = 25; 
       for(let i=0;i<n;i++){
         const h = document.createElement('div');
         h.className = 'heart';
@@ -742,7 +773,7 @@
       modalBody.innerHTML = html || "";
       modal.classList.add('show');
       setTimeout(()=>modalOk.focus(), 10);
-      playSfx('pop'); // Âm thanh khi hiện modal
+      playSfx('pop'); 
     }
     function hideModal(){ modal.classList.remove('show'); }
     modalOk.addEventListener('click', hideModal);
@@ -751,7 +782,7 @@
     window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('show')) hideModal(); });
 
     document.getElementById('btnSurprise').addEventListener('click', ()=>{
-      playSfx('tada'); // Âm thanh bất ngờ
+      playSfx('tada'); 
       showModal("🎁 Bất ngờ nè!", `
         <div style="font-weight:800;color:#d6336c;margin-bottom:8px">Bé iu, em chính thức nhận được:</div>
         <ul style="list-style:none;padding:0">
@@ -844,23 +875,23 @@
     document.getElementById('btnPickCandy').addEventListener('click', ()=>{
       const msg = compliments[Math.floor(Math.random()*compliments.length)];
       candyOut.textContent = msg;
-      playSfx('pop'); // Âm thanh bốc kẹo
+      playSfx('pop'); 
       burstConfetti(18);
     });
     document.getElementById('btnShakeJar').addEventListener('click', ()=>{
       jar.classList.remove('shake'); void jar.offsetWidth; jar.classList.add('shake');
-      playSfx('shake'); // Âm thanh lắc
+      playSfx('shake');
       shakeCount++;
-      const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
-      if(hitKey){
-        hasCandyKey = true;
-        candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
-        playSfx('win'); // Âm thanh rơi chìa khóa
-        burstConfetti(22);
-      } else {
-        candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
-      }
-      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      // const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
+      // if(hitKey){
+      //   hasCandyKey = true;
+      //   candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
+      //   playSfx('win');
+      //   burstConfetti(22);
+      // } else {
+      //   candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      // }
+      // refreshUnlockChecklist(pw.value === CARD_PASSWORD);
       saveProgress();
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
@@ -911,7 +942,7 @@
         if(quizPassed) playSfx('win');
         showModal("🎉 Kết quả!", `
           <div style="font-weight:900;color:#d6336c;font-size:18px">Em đạt ${qscore}/${quiz.length} điểm!</div>
-          <div style="margin-top:8px;font-weight:800;color:${quizPassed ? '#0f9d58' : '#b42318'}">
+          <div style="margin-top:8px;font-weight:800;color:${quizPassed ? '#10b981' : '#f43f5e'}">
             ${quizPassed ? '✅ Đã đạt điều kiện quiz (>=4/5)' : '❌ Chưa đạt điều kiện quiz (cần >=4/5)'}
           </div>
           <div style="margin-top:15px;color:#555"><b>Phần thưởng:</b> 1 cái ôm + 1 lời nhắn:</div>
@@ -972,7 +1003,7 @@
         secretBox.classList.add('show');
         document.getElementById('letterCard').scrollIntoView({behavior:'smooth', block:'start'});
         burstConfetti(36);
-        playSfx('win'); // Âm thanh mở khóa
+        playSfx('win'); 
         saveProgress();
       }
     }
@@ -1012,37 +1043,29 @@
       
       let hit = false;
 
-      h.addEventListener('mousedown', (ev)=>{
-        // Touch/click handling
-        hit = true;
-        score++;
-        bestHeartScore = Math.max(bestHeartScore, score);
-        scoreEl.textContent = "Điểm: " + score;
-        updateGameProgress(score);
-        setRank(score);
-        popAt(x, parseInt(h.style.top||0) + 200, "✨"); // approx Y
-        burstConfetti(8);
-        milestoneCheck(score);
-        saveProgress();
-        playSfx('pop'); // Âm thanh nổ tim
-        h.remove();
-      });
-      // Fallback for click if mousedown weird
-      h.addEventListener('click', (ev)=>{
-        if(hit) return;
-        hit = true;
-        score++;
-        bestHeartScore = Math.max(bestHeartScore, score);
-        scoreEl.textContent = "Điểm: " + score;
-        updateGameProgress(score);
-        setRank(score);
-        popAt(x, ev.offsetY, "✨");
-        burstConfetti(8);
-        milestoneCheck(score);
-        saveProgress();
-        playSfx('pop');
-        h.remove();
-      });
+      const clickHandler = (ev) => {
+          if(hit) return;
+          hit = true;
+          score++;
+          bestHeartScore = Math.max(bestHeartScore, score);
+          scoreEl.textContent = "Điểm: " + score;
+          updateGameProgress(score);
+          setRank(score);
+          // Fix tọa độ click nếu dùng touch
+          const clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+          const rect = playfield.getBoundingClientRect();
+          const relY = clientY - rect.top;
+          
+          popAt(x, relY, "✨");
+          burstConfetti(8);
+          milestoneCheck(score);
+          saveProgress();
+          playSfx('pop');
+          h.remove();
+      };
+
+      h.addEventListener('mousedown', clickHandler);
+      h.addEventListener('touchstart', clickHandler, {passive: true});
 
       h.addEventListener('animationend', ()=>{
         if(!hit) breakAt(x);
@@ -1052,12 +1075,11 @@
       playfield.appendChild(h);
     }
     
-    // Add fall keyframes for game specifically
     const styleSheet = document.createElement("style");
     styleSheet.innerText = `
       @keyframes fall {
         from{transform: translateY(-40px) rotate(45deg);opacity:1}
-        to{transform: translateY(320px) rotate(45deg);opacity:0.2}
+        to{transform: translateY(340px) rotate(45deg);opacity:0.2}
       }
     `;
     document.head.appendChild(styleSheet);
@@ -1107,7 +1129,7 @@
         letterOpened = true;
         saveProgress();
         burstConfetti(20);
-        playSfx('win'); // Âm thanh mở thiệp thành công
+        playSfx('win'); 
         showModal("💌 Mở thiệp thành công", "Anh biết em làm được mà 😚");
       } else {
         playSfx('wrong');
