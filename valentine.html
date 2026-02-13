@@ -223,9 +223,26 @@
             <div class="tiny">Gửi em yêu — từ <b>anh</b> ❤️</div>
           </div>
         </div>
-        <div class="actions">
-          <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
-          <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
+        <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
+        <button class="btn ghost" id="btnReset">♻️ Reset</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Lời chúc">
+      <div class="left">
+        <div class="kicker">✨ Một chiếc web nhỏ cho em</div>
+        <h1>Chúc em một Valentine thật ngọt ngào 💞</h1>
+        <p class="sub">
+          Anh làm trang này để em vừa xem ảnh, vừa chơi vài trò “cute phô mai que”,
+          và quan trọng nhất là… để em biết rằng <b>anh thương em rất nhiều</b>.
+        </p>
+        <div class="actions" style="justify-content:flex-start">
+          <button class="btn primary" id="btnLoveQuiz">🧠 Quiz tình yêu</button>
+          <button class="btn ghost" id="btnCandy">🍬 Hũ kẹo lời khen</button>
+          <button class="btn ghost" id="btnGame">❤️ Bắt tim</button>
         </div>
       </header>
 
@@ -335,13 +352,11 @@
               </svg>
             </div>
 
-            <div class="candyLine">
-              <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
-              <div class="actions" style="justify-content:flex-start">
-                <button class="btn primary" id="btnPickCandy">🍬 Bốc
-                  kẹo</button>
-                <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
-              </div>
+          <div class="candyLine">
+            <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
+            <div class="actions" style="justify-content:flex-start">
+              <button class="btn primary" id="btnPickCandy">🍬 Bốc kẹo</button>
+              <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
             </div>
           </div>
         </div>
@@ -355,32 +370,26 @@
           </div>
         </div>
 
-        <div class="card" id="gameCard">
-          <h2>❤️ Mini game: Bắt tim</h2>
-          <p>
-            Bấm tim rơi xuống để ghi điểm. Có hiệu ứng “bắt trúng” và “tim vỡ”
-            nếu bỏ lỡ.
-            <br />Mốc 30 tim sẽ mở <b>bí mật</b> trong tấm thiệp 💌
-          </p>
+      <div class="card" id="gameCard">
+        <h2>❤️ Mini game: Bắt tim</h2>
+        <p>
+          Bấm tim rơi xuống để ghi điểm. Có hiệu ứng “bắt trúng” và “tim vỡ” nếu bỏ lỡ.
+          <br/>Mốc 30 tim sẽ mở <b>bí mật</b> trong tấm thiệp 💌
+        </p>
 
-          <div class="game">
-            <div class="progressWrap">
-              <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng
-                bắt tim 💗</div>
-              <div class="progressBar" aria-hidden="true">
-                <div class="progressFill" id="gameProgressFill"></div>
-              </div>
+        <div class="game">
+          <div class="progressWrap">
+            <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng bắt tim 💗</div>
+            <div class="progressBar" aria-hidden="true">
+              <div class="progressFill" id="gameProgressFill"></div>
             </div>
-            <div class="gameTop">
-              <div class="score" id="score">Điểm: 0</div>
-              <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
-              <div class="actions" style="justify-content:flex-start">
-                <button class="btn primary" id="btnPlay">Chơi</button>
-                <button class="btn ghost" id="btnStop">Dừng</button>
-              </div>
-            </div>
-            <div class="playfield" id="playfield" aria-label="Khu vực chơi">
-              <div class="ground"></div>
+          </div>
+          <div class="gameTop">
+            <div class="score" id="score">Điểm: 0</div>
+            <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
+            <div class="actions" style="justify-content:flex-start">
+              <button class="btn primary" id="btnPlay">Chơi</button>
+              <button class="btn ghost" id="btnStop">Dừng</button>
             </div>
           </div>
         </div>
@@ -402,27 +411,32 @@
               game</button>
           </div>
 
-          <div class="valBody">
-            <div class="envelope" aria-label="Thiệp và phong thư">
-              <div class="envPaper"></div>
-              <div class="envBody"></div>
-              <div class="envFlap"></div>
-              <div class="envSealWax" aria-hidden="true"></div>
-              <div class="letter" id="letter">
-                <h3>Lá thư dành cho em 💗</h3>
-                <p id="letterMain">
-                  Em à, nếu em đang đọc tới đây thì chắc là… em đã mở đúng chiếc
-                  thiệp anh gửi rồi.
-                  Anh không giỏi nói điều to tát, nhưng anh muốn em biết: <b>anh
-                    trân trọng em</b> và luôn muốn em vui.
-                </p>
+        <div class="valBody">
+          <div class="envelope" aria-label="Thiệp và phong thư">
+            <div class="envPaper"></div>
+            <div class="envBody"></div>
+            <div class="envFlap"></div>
+            <div class="envSealWax" aria-hidden="true"></div>
+            <div class="letter" id="letter">
+              <h3>Lá thư dành cho em 💗</h3>
+              <p id="letterMain">
+                💌 Chào em cô gái bé bỏng của anh.<br/><br/>
+                🥺 Mở được bức thư này chắc cũng khó khăn lắm he, xin lỗi vì đã biết em đang mệt mà còn làm khó em đến vậy.<br/><br/>
+                🎁 Thật sự thì đây là món quà anh làm ra để tặng cho em và đây cũng là lần đầu tiên anh làm một món quà như vậy (chắc là vì em cũng học IT giống anh).<br/><br/>
+                🌤️ Anh biết những ngày này em đang rất mệt, rất khó chịu và cũng có thể stress nữa, nhưng bên cạnh đó anh vẫn mong em sẽ tìm được những thú vui trong cuộc sống, có lẽ nhờ vậy mà em sẽ bớt quạo anh hơn chăng?<br/><br/>
+                💗 Anh không tỏ tình ở đây vì anh biết em sẽ trả lời thế nào... tuy nhiên thương em là điều anh không lường trước, và anh cũng không chê.<br/><br/>
+                🗓️ Có lẽ năm nay là năm valentine đáng nhớ nhất của anh - ngày mà anh chân thành viết những câu từ này cho em.<br/><br/>
+                ✨ Còn nhiều thứ anh muốn nói nữa nhưng thôi đợi đến khi anh đến bên em đi rồi nói sau vậy.<br/><br/>
+                🌸 Chúc em hôm nay sẽ thật vui vẻ và hạnh phúc nhé, dĩ nhiên là không chỉ hôm nay.<br/><br/>
+                🤍 Cảm ơn em vì đã cho anh cảm giác được quan tâm và chiều chuộng.<br/><br/>
+                ❤️ Love u Ginn.
+              </p>
 
-                <div class="secret" id="secretBox">
-                  <div class="secretTitle">🔐 Bí mật (mở khi đạt 30 tim)</div>
-                  <div style="color:#6b7280;font-weight:700;line-height:1.6">
-                    <b>[BÍ MẬT CỦA NGƯỜI CON TRAI]</b><br />
-                    (Anh tự chỉnh đoạn này sau nhé 😚)
-                  </div>
+              <div class="secret" id="secretBox">
+                <div class="secretTitle">🔐 Bí mật (mở khi đạt 30 tim)</div>
+                <div style="color:#6b7280;font-weight:700;line-height:1.6">
+                  <b>🤫 Bí mật của anh:</b><br/>
+                  Bí mật của anh chính là ảnh của em anh chưa xóa :&gt; sao xóa được kho báu của anh chứ hehe 📸💎
                 </div>
               </div>
             </div>
@@ -444,6 +458,16 @@
             <div class="hint">Gợi ý: mật khẩu là thứ mà “anh biết em sẽ nhớ”
               😌</div>
           </div>
+          <div class="unlockReq" id="unlockReq">
+            <div class="title">Điều kiện mở thư cuối:</div>
+            <ul>
+              <li id="reqPw">❌ Nhập đúng mật khẩu</li>
+              <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
+              <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
+              <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
+            </ul>
+          </div>
+          <div class="hint">Gợi ý: mật khẩu là thứ mà “anh biết em sẽ nhớ” 😌</div>
         </div>
       </section>
     </div>
