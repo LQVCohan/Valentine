@@ -367,23 +367,23 @@
           <p>Bấm vào ảnh
             để phóng to nhé.</p>
           <div class="gallery" id="gallery">
-            <img class="shot" src="Ảnh/01.jpg" alt="Ảnh 1"
-              data-full="Ảnh/01.jpg"
+            <img class="shot" src="image/01.jpg" alt="image 1"
+              data-full="image/01.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Love';this.parentElement.style.display='block'">
-            <img class="shot" src="Ảnh/02.jpg" alt="Ảnh 2"
-              data-full="Ảnh/02.jpg"
+            <img class="shot" src="image/02.jpg" alt="image 2"
+              data-full="image/02.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=You';">
-            <img class="shot" src="Ảnh/03.jpg" alt="Ảnh 3"
-              data-full="Ảnh/03.jpg"
+            <img class="shot" src="image/03.jpg" alt="image 3"
+              data-full="image/03.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=So';">
-            <img class="shot" src="Ảnh/04.jpg" alt="Ảnh 4"
-              data-full="Ảnh/04.jpg"
+            <img class="shot" src="image/04.jpg" alt="image 4"
+              data-full="image/04.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Much';">
-            <img class="shot" src="Ảnh/05.jpg" alt="Ảnh 5"
-              data-full="Ảnh/05.jpg"
+            <img class="shot" src="image/05.jpg" alt="image 5"
+              data-full="image/05.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Bae';">
-            <img class="shot" src="Ảnh/06.jpg" alt="Ảnh 6"
-              data-full="Ảnh/06.jpg"
+            <img class="shot" src="image/06.jpg" alt="image 6"
+              data-full="image/06.jpg"
               onerror="this.src='https://placehold.co/200x200/fff0f3/ff3366?text=Cute';">
           </div>
         </div>
@@ -808,7 +808,7 @@
       if(!img) return;
       playSfx('pop');
       const src = img.getAttribute('data-full');
-      showModal("📸 Ảnh của em", `<img src="${src}" alt="Ảnh" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />`);
+      showModal("📸 image của em", `<img src="${src}" alt="image" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />`);
     });
 
     const compliments = [
