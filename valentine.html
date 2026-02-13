@@ -29,10 +29,10 @@
     /* floating hearts background */
     .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
     .heart{position:absolute;width:14px;height:14px;transform:rotate(45deg);opacity:.22;animation: floatUp linear infinite;filter: blur(.15px);}
-    .heart:before,.heart:after{content:"";position:absolute;width:14px;height:14px;background:var(--pink);border-radius:50%;}
+    .heart:before,.heart:after{content:"";position:absolute;width:100%;height:100%;background:var(--pink);border-radius:50%;}
     .heart{background:var(--pink)}
-    .heart:before{left:-7px; top:0}
-    .heart:after{left:0; top:-7px}
+    .heart:before{left:-50%; top:0}
+    .heart:after{left:0; top:-50%}
     @keyframes floatUp{from{transform: translateY(110vh) rotate(45deg);}to{transform: translateY(-20vh) rotate(45deg);}}
 
     .wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:24px 16px 52px;}
@@ -109,6 +109,10 @@
     .gameTop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
     .score{font-weight:900;color:#8a1747;background:#ffe7f1;padding:8px 12px;border-radius:999px;}
     .rank{font-weight:900;color:#8a1747;background:#fff;border:1px solid rgba(255,77,141,.22);padding:8px 12px;border-radius:999px;}
+    .progressWrap{margin-bottom:10px;background:#fff8fc;border:1px solid rgba(255,77,141,.16);border-radius:12px;padding:9px 10px;}
+    .progressText{font-weight:800;color:#8a1747;font-size:13px;margin-bottom:8px;}
+    .progressBar{height:10px;background:#ffe3ef;border-radius:999px;overflow:hidden;}
+    .progressFill{height:100%;width:0%;background:linear-gradient(90deg,#ff4d8d,#ff86b4);transition:width .2s ease;}
     .playfield{position:relative;height:260px;border-radius:14px;overflow:hidden;background: radial-gradient(240px 120px at 30% 30%, #ffe5f0, #fff);border:1px solid rgba(0,0,0,.06);}
     .ground{position:absolute;left:0;right:0;bottom:0;height:44px;background: linear-gradient(180deg, rgba(255,77,141,.05), rgba(255,77,141,.12));border-top:1px solid rgba(255,77,141,.12);}
     .tapHeart{position:absolute;width:30px;height:30px;transform: rotate(45deg);cursor:pointer;animation: fall linear forwards;}
@@ -155,17 +159,55 @@
     .pwRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
     .inp{flex:1;min-width:200px;border:1px solid rgba(255,77,141,.22);border-radius:14px;padding:12px 12px;font-weight:800;outline:none;}
     .hint{color:var(--muted);font-weight:650;font-size:13px;margin-top:8px}
-    .envelope{position:relative;height:160px;border-radius:18px;background: linear-gradient(135deg,#fff0f7,#fff);border:1px solid rgba(255,77,141,.14);overflow:hidden;}
-    .envFlap{position:absolute;left:-10%;right:-10%;top:-60%;height:180%;background: linear-gradient(135deg, rgba(255,77,141,.20), rgba(255,134,180,.18));
-      transform: rotate(12deg);filter: blur(.2px);}
+    .envelope{position:relative;height:190px;border-radius:20px;overflow:hidden;
+      background:
+        radial-gradient(220px 100px at 50% -20%, rgba(255,255,255,.86), rgba(255,255,255,0) 65%),
+        linear-gradient(145deg,#ffe8f2,#ffd8e9 55%,#ffd0e5);
+      border:1px solid rgba(255,77,141,.24);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 16px 28px rgba(255,77,141,.14);
+    }
+    .envPaper{position:absolute;inset:0;background:
+      linear-gradient(135deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,.05) 32%, rgba(255,77,141,.07) 100%);
+      pointer-events:none;}
+    .envBody{position:absolute;inset:0;z-index:3;pointer-events:none;}
+    .envBody:before,.envBody:after{content:"";position:absolute;bottom:0;width:52%;height:78%;
+      background: linear-gradient(160deg,#ffe4f0,#ffd2e7 70%,#ffc6e0);
+      border:1px solid rgba(255,77,141,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+    }
+    .envBody:before{left:-3%;transform: skewY(19deg);transform-origin:bottom left;border-right:none;border-top-left-radius:18px;}
+    .envBody:after{right:-3%;transform: skewY(-19deg);transform-origin:bottom right;border-left:none;border-top-right-radius:18px;}
+    .envFlap{position:absolute;left:50%;top:0;z-index:6;transform: translateX(-50%);
+      width:104%;height:70%;
+      clip-path: polygon(50% 100%, 0 0, 100% 0);
+      background:
+        linear-gradient(180deg, #fff5fa 0%, #ffd9ea 48%, #ffc9e1 100%);
+      border-bottom:1px solid rgba(255,77,141,.28);
+      box-shadow: 0 6px 14px rgba(255,77,141,.18);
+    }
+    .envSealWax{position:absolute;left:50%;top:44%;z-index:7;transform:translate(-50%,-50%);
+      width:54px;height:54px;border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #ffbfd8 0%, #ff6aa2 45%, #d92f73 100%);
+      border:2px solid rgba(255,255,255,.55);
+      box-shadow: 0 8px 18px rgba(217,47,115,.45), inset 0 3px 8px rgba(255,255,255,.35);
+      display:grid;place-items:center;color:#fff;font-size:22px;
+      transition: transform .38s ease, opacity .35s ease;
+    }
+    .envSealWax:before{content:"❤";transform: translateY(-1px);filter: drop-shadow(0 1px 1px rgba(0,0,0,.2));}
+    .envelope.opened .envFlap{opacity:0;transform: translateX(-50%) translateY(-22px) scale(.94);}
+    .envelope.opened .envSealWax{opacity:0;transform: translate(-50%,-50%) scale(.82);}
     .letter{position:absolute;left:14px;right:14px;bottom:14px;top:14px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 18px 40px rgba(31,41,55,.12);padding:14px;transform: translateY(72px);transition: transform .55s cubic-bezier(.2,.9,.2,1);}
-    .letter.open{transform: translateY(0)}
+      z-index:4;box-shadow:0 18px 40px rgba(31,41,55,.12);padding:14px;transform: translateY(118%);opacity:0;transition: transform .55s cubic-bezier(.2,.9,.2,1), opacity .4s ease;}
+    .letter.open{transform: translateY(0);opacity:1}
     .letter h3{margin:0 0 8px;color:#8a1747}
     .letter p{margin:0;color:#6b7280;font-weight:650;line-height:1.6}
     .secret{margin-top:12px;padding:12px;border-radius:14px;background:#fff0f7;border:1px solid rgba(255,77,141,.16);display:none}
     .secret.show{display:block}
     .secretTitle{font-weight:900;color:#8a1747;margin-bottom:6px}
+    .unlockReq{margin-top:10px;padding:11px;border-radius:14px;background:#fff;border:1px solid rgba(255,77,141,.18);}
+    .unlockReq .title{font-weight:900;color:#8a1747;font-size:13px;margin-bottom:6px}
+    .unlockReq ul{margin:0;padding-left:18px;color:#6b7280;font-weight:700;font-size:13px;line-height:1.6}
+    .unlockReq .ok{color:#0f9d58}
   </style>
 </head>
 <body>
@@ -276,7 +318,7 @@
             <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
             <div class="actions" style="justify-content:flex-start">
               <button class="btn primary" id="btnPickCandy">🍬 Bốc kẹo</button>
-              <button class="btn ghost" id="btnShakeJar">🫙 Lắc hũ</button>
+              <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
             </div>
           </div>
         </div>
@@ -298,6 +340,12 @@
         </p>
 
         <div class="game">
+          <div class="progressWrap">
+            <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng bắt tim 💗</div>
+            <div class="progressBar" aria-hidden="true">
+              <div class="progressFill" id="gameProgressFill"></div>
+            </div>
+          </div>
           <div class="gameTop">
             <div class="score" id="score">Điểm: 0</div>
             <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
@@ -328,7 +376,10 @@
 
         <div class="valBody">
           <div class="envelope" aria-label="Thiệp và phong thư">
+            <div class="envPaper"></div>
+            <div class="envBody"></div>
             <div class="envFlap"></div>
+            <div class="envSealWax" aria-hidden="true"></div>
             <div class="letter" id="letter">
               <h3>Lá thư dành cho em 💗</h3>
               <p id="letterMain">
@@ -349,6 +400,15 @@
           <div class="pwRow">
             <input class="inp" id="pw" placeholder="Nhập mật khẩu..." autocomplete="off" />
             <button class="btn primary" id="btnOpenLetter">Mở thiệp</button>
+          </div>
+          <div class="unlockReq" id="unlockReq">
+            <div class="title">Điều kiện mở thư cuối:</div>
+            <ul>
+              <li id="reqPw">❌ Nhập đúng mật khẩu</li>
+              <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
+              <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
+              <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
+            </ul>
           </div>
           <div class="hint">Gợi ý: mật khẩu là thứ mà “anh biết em sẽ nhớ” 😌</div>
         </div>
@@ -447,6 +507,31 @@
     ];
     const candyOut = document.getElementById('candyOut');
     const jar = document.getElementById('jar');
+    let hasCandyKey = false;
+    let shakeCount = 0;
+
+    let quizPassed = false;
+    let gameGoalReached = false;
+
+    const reqPw = document.getElementById('reqPw');
+    const reqQuiz = document.getElementById('reqQuiz');
+    const reqCandy = document.getElementById('reqCandy');
+    const reqGame = document.getElementById('reqGame');
+
+    function markReq(el, ok, text){
+      el.textContent = `${ok ? '✅' : '❌'} ${text}`;
+      el.classList.toggle('ok', ok);
+    }
+
+    function refreshUnlockChecklist(isPwOk = false){
+      markReq(reqPw, isPwOk, 'Nhập đúng mật khẩu');
+      markReq(reqQuiz, quizPassed, 'Hoàn thành quiz tối thiểu 4/5');
+      markReq(reqCandy, hasCandyKey, 'Lắc hũ tới khi rơi được chìa khóa');
+      markReq(reqGame, gameGoalReached, 'Bắt tim đạt mốc cuối (30/30)');
+    }
+
+    refreshUnlockChecklist(false);
+
     document.getElementById('btnPickCandy').addEventListener('click', ()=>{
       const msg = compliments[Math.floor(Math.random()*compliments.length)];
       candyOut.textContent = msg;
@@ -454,7 +539,16 @@
     });
     document.getElementById('btnShakeJar').addEventListener('click', ()=>{
       jar.classList.remove('shake'); void jar.offsetWidth; jar.classList.add('shake');
-      candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      shakeCount++;
+      const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
+      if(hitKey){
+        hasCandyKey = true;
+        candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
+        burstConfetti(22);
+      } else {
+        candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      }
+      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
       document.getElementById('candyCard').scrollIntoView({behavior:'smooth', block:'start'});
@@ -493,9 +587,14 @@
         });
       }
       function finish(){
+        quizPassed = qscore >= 4;
+        refreshUnlockChecklist(pw.value === CARD_PASSWORD);
         burstConfetti();
         showModal("🎉 Kết quả!", `
           <div style="font-weight:900;color:#8a1747">Em đạt ${qscore}/${quiz.length} điểm!</div>
+          <div style="margin-top:8px;font-weight:800;color:${quizPassed ? '#0f9d58' : '#b42318'}">
+            ${quizPassed ? '✅ Đã đạt điều kiện quiz (>=4/5)' : '❌ Chưa đạt điều kiện quiz (cần >=4/5)'}
+          </div>
           <div style="margin-top:8px"><b>Phần thưởng:</b> 1 cái ôm + 1 lời nhắn:</div>
           <div style="margin-top:10px;background:#fff;border:1px solid rgba(255,77,141,.2);border-radius:16px;padding:12px;font-weight:800;color:#8a1747">
             “Em là điều anh trân trọng nhất. Cảm ơn em vì đã ở đây.” 💗
@@ -513,12 +612,25 @@
     const playfield = document.getElementById('playfield');
     const scoreEl = document.getElementById('score');
     const rankEl = document.getElementById('rank');
+    const gameProgressText = document.getElementById('gameProgressText');
+    const gameProgressFill = document.getElementById('gameProgressFill');
     let playing = false;
     let score = 0;
     let spawner = null;
 
     let secretUnlocked = false;
     const secretBox = document.getElementById('secretBox');
+    const PROGRESS_TARGET = 30;
+
+    function updateGameProgress(s){
+      const pct = Math.min(100, (s / PROGRESS_TARGET) * 100);
+      gameProgressFill.style.width = pct + '%';
+      gameGoalReached = s >= PROGRESS_TARGET;
+      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      gameProgressText.textContent = s >= PROGRESS_TARGET
+        ? 'Hoàn thành! Em đã đạt 30/30 tim và mở bí mật 💌'
+        : `Tiến độ mở bí mật: ${s}/${PROGRESS_TARGET} tim`;
+    }
 
     function setRank(s){
       const ranks = [
@@ -535,12 +647,9 @@
     }
 
     function milestoneCheck(s){
-      if(s === 10) showModal("🎁 Mốc 10 tim!", "Em giỏi quá! Anh tặng em 1 cái ôm online 🤭");
-      if(s === 20) showModal("🎁 Mốc 20 tim!", "Tới đây là siêu đỉnh rồi đó! Anh thương em thêm 20 lần 💞");
       if(s === 30){
         secretUnlocked = true;
         secretBox.classList.add('show');
-        showModal("🔐 Mốc 30 tim!", "Em đã mở được <b>bí mật</b> trong tấm thiệp 💌 (kéo xuống phần thiệp để xem)");
         document.getElementById('letterCard').scrollIntoView({behavior:'smooth', block:'start'});
         burstConfetti(36);
         // TODO: Anh tự chỉnh nội dung bí mật ở secretBox
@@ -580,6 +689,7 @@
         hit = true;
         score++;
         scoreEl.textContent = "Điểm: " + score;
+        updateGameProgress(score);
         setRank(score);
         popAt(x, ev.offsetY, "✨");
         burstConfetti(8);
@@ -600,10 +710,11 @@
       playing = true;
       score = 0;
       scoreEl.textContent = "Điểm: 0";
+      updateGameProgress(0);
       setRank(0);
       spawner = setInterval(spawnTapHeart, 420);
       spawnTapHeart();
-      showModal("❤️ Bắt tim", "Bắt đầu rồi đó! Bấm tim liên tục nha em 😆");
+      gameProgressText.textContent = "Game đã bắt đầu! Bắt tim liên tục nha em 😆";
     }
 
     function stopGame(){
@@ -611,7 +722,7 @@
       if(spawner) clearInterval(spawner);
       spawner = null;
       [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
-      showModal("✅ Dừng game", `Em vừa bắt được <b>${score}</b> tim. Anh cộng thêm <b>${score}</b> lần thương em nữa 💗`);
+      gameProgressText.textContent = `Đã dừng game. Thành tích cuối: ${score} tim 💗`;
       burstConfetti(22);
     }
 
@@ -627,15 +738,20 @@
 
     const pw = document.getElementById('pw');
     const letter = document.getElementById('letter');
+    const envelope = document.querySelector('.envelope');
     document.getElementById('btnOpenLetter').addEventListener('click', ()=>{
-      if(pw.value === CARD_PASSWORD){
+      const isPwOk = pw.value === CARD_PASSWORD;
+      refreshUnlockChecklist(isPwOk);
+      if(isPwOk && quizPassed && hasCandyKey && gameGoalReached){
         letter.classList.add('open');
+        envelope.classList.add('opened');
         burstConfetti(20);
         showModal("💌 Mở thiệp thành công", "Anh biết em làm được mà 😚");
       } else {
-        showModal("🔒 Sai mật khẩu", "Thử lại nha em. Anh tin em nhớ mà 🥺");
+        showModal("🔒 Chưa mở được thư", "Cần nhập đúng mật khẩu và hoàn thành đủ 3 minigame để mở thư cuối nha em 💗");
       }
     });
+    pw.addEventListener('input', ()=>refreshUnlockChecklist(pw.value === CARD_PASSWORD));
     pw.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') document.getElementById('btnOpenLetter').click(); });
 
     const bgm = document.getElementById('bgm');
