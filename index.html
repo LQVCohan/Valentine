@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>14/02 💘 For Ginn</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%25%27 y1=%270%25%27 x2=%27100%25%27 y2=%27100%25%27%3E%3Cstop offset=%270%25%27 stop-color=%27%23ff3366%27/%3E%3Cstop offset=%27100%25%27 stop-color=%27%23ff7aa2%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27url(%23g)%27/%3E%3Cpath d=%27M32 47S13 36 13 24a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 12-19 23-19 23Z%27 fill=%27white%27/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -391,8 +392,8 @@
         <div class="card fade-in-up" style="animation-delay: 0.4s"
           id="candyCard">
           <h2>🍬 Hũ kẹo lời khen</h2>
-          <p>Bốc 1 viên kẹo là nhận 1 lời khen. Lắc hũ là kẹo “rơi lộp bộp”
-            ở trong tim anh 😳</p>
+          <p>Bốc 1 viên kẹo là nhận 1 lời khen và có cơ hội rơi chìa khóa.
+            Lắc hũ chỉ giúp tăng độ may mắn trước khi bốc thôi nha 😳</p>
 
           <div class="jarWrap">
             <div class="jar" id="jar"
@@ -604,7 +605,7 @@
                 style="margin:0;padding-left:20px;color:#555;font-size:14px;line-height:2">
                 <li id="reqPw">❌ Nhập đúng mật khẩu</li>
                 <li id="reqQuiz">❌ Hoàn thành quiz tối thiểu 4/5</li>
-                <li id="reqCandy">❌ Lắc hũ tới khi rơi được chìa khóa</li>
+                <li id="reqCandy">❌ Bốc kẹo tới khi rơi được chìa khóa</li>
                 <li id="reqGame">❌ Bắt tim đạt mốc cuối (30/30)</li>
               </ul>
               <style>.unlockReq li.ok { color: #10b981; font-weight: 700; list-style-type: '✅  '; }</style>
@@ -846,7 +847,7 @@
     function refreshUnlockChecklist(isPwOk = false){
       markReq(reqPw, isPwOk, 'Nhập đúng mật khẩu');
       markReq(reqQuiz, quizPassed, 'Hoàn thành quiz tối thiểu 4/5');
-      markReq(reqCandy, hasCandyKey, 'Lắc hũ tới khi rơi được chìa khóa');
+      markReq(reqCandy, hasCandyKey, 'Bốc kẹo tới khi rơi được chìa khóa');
       markReq(reqGame, gameGoalReached, 'Bắt tim đạt mốc cuối (30/30)');
     }
 
@@ -882,24 +883,29 @@
 
     document.getElementById('btnPickCandy').addEventListener('click', ()=>{
       const msg = compliments[Math.floor(Math.random()*compliments.length)];
-      candyOut.textContent = msg;
-      playSfx('pop'); 
-      burstConfetti(18);
+      const luckBonus = Math.min(0.45, shakeCount * 0.03);
+      const hitKey = !hasCandyKey && (Math.random() < (0.12 + luckBonus));
+      if(hitKey){
+        hasCandyKey = true;
+        candyOut.textContent = "🔑 Ting! Em bốc trúng chìa khóa rồi nè!";
+        playSfx('win');
+        burstConfetti(22);
+      } else {
+        candyOut.textContent = msg + (shakeCount > 0 ? ` (May mắn +${Math.round(luckBonus * 100)}%)` : '');
+        playSfx('pop');
+        burstConfetti(18);
+      }
+      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      saveProgress();
     });
     document.getElementById('btnShakeJar').addEventListener('click', ()=>{
       jar.classList.remove('shake'); void jar.offsetWidth; jar.classList.add('shake');
       playSfx('shake');
-      // shakeCount++;
-      // const hitKey = !hasCandyKey && (shakeCount >= 5 && Math.random() < 0.35);
-      // if(hitKey){
-      //   hasCandyKey = true;
-      //   candyOut.textContent = "🔑 Ting! Em đã lắc rơi được chìa khóa rồi nè!";
-      //   playSfx('win');
-      //   burstConfetti(22);
-      // } else {
-      //   candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
-      // }
-      // refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      shakeCount++;
+      if(!hasCandyKey){
+        const bonus = Math.min(45, shakeCount * 3);
+        candyOut.textContent = `Lắc lắc... May mắn tăng lên ${bonus}% rồi, bốc kẹo thử nè!`;
+      }
       saveProgress();
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
@@ -1201,6 +1207,7 @@
 
     function applyProgressToUi(){
       if(hasCandyKey) candyOut.textContent = "🔑 Em đã có chìa khóa rồi, mở thư thôi nào!";
+      else if(shakeCount > 0) candyOut.textContent = `May mắn hiện tại: +${Math.min(45, shakeCount * 3)}%. Lắc thêm hoặc bốc kẹo ngay cũng được nè!`;
       scoreEl.textContent = "Điểm: " + bestHeartScore;
       missesEl.textContent = "Lỡ hụt: 0/10";
       setRank(bestHeartScore);
@@ -1230,7 +1237,7 @@
       score = 0;
       misses = 0;
       gameOver = false;
-      candyOut.textContent = "Bấm “Bốc kẹo” đi em 😚";
+      candyOut.textContent = "Bấm “Bốc kẹo” đi bé 😚";
       gameProgressFill.style.width = '0%';
       gameProgressText.textContent = 'Tiến độ: sẵn sàng bắt tim 💗';
       scoreEl.textContent = 'Điểm: 0';
