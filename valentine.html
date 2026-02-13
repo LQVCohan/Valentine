@@ -29,10 +29,10 @@
     /* floating hearts background */
     .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
     .heart{position:absolute;width:14px;height:14px;transform:rotate(45deg);opacity:.22;animation: floatUp linear infinite;filter: blur(.15px);}
-    .heart:before,.heart:after{content:"";position:absolute;width:14px;height:14px;background:var(--pink);border-radius:50%;}
+    .heart:before,.heart:after{content:"";position:absolute;width:100%;height:100%;background:var(--pink);border-radius:50%;}
     .heart{background:var(--pink)}
-    .heart:before{left:-7px; top:0}
-    .heart:after{left:0; top:-7px}
+    .heart:before{left:-50%; top:0}
+    .heart:after{left:0; top:-50%}
     @keyframes floatUp{from{transform: translateY(110vh) rotate(45deg);}to{transform: translateY(-20vh) rotate(45deg);}}
 
     .wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:24px 16px 52px;}
@@ -109,6 +109,10 @@
     .gameTop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
     .score{font-weight:900;color:#8a1747;background:#ffe7f1;padding:8px 12px;border-radius:999px;}
     .rank{font-weight:900;color:#8a1747;background:#fff;border:1px solid rgba(255,77,141,.22);padding:8px 12px;border-radius:999px;}
+    .progressWrap{margin-bottom:10px;background:#fff8fc;border:1px solid rgba(255,77,141,.16);border-radius:12px;padding:9px 10px;}
+    .progressText{font-weight:800;color:#8a1747;font-size:13px;margin-bottom:8px;}
+    .progressBar{height:10px;background:#ffe3ef;border-radius:999px;overflow:hidden;}
+    .progressFill{height:100%;width:0%;background:linear-gradient(90deg,#ff4d8d,#ff86b4);transition:width .2s ease;}
     .playfield{position:relative;height:260px;border-radius:14px;overflow:hidden;background: radial-gradient(240px 120px at 30% 30%, #ffe5f0, #fff);border:1px solid rgba(0,0,0,.06);}
     .ground{position:absolute;left:0;right:0;bottom:0;height:44px;background: linear-gradient(180deg, rgba(255,77,141,.05), rgba(255,77,141,.12));border-top:1px solid rgba(255,77,141,.12);}
     .tapHeart{position:absolute;width:30px;height:30px;transform: rotate(45deg);cursor:pointer;animation: fall linear forwards;}
@@ -276,7 +280,7 @@
             <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
             <div class="actions" style="justify-content:flex-start">
               <button class="btn primary" id="btnPickCandy">🍬 Bốc kẹo</button>
-              <button class="btn ghost" id="btnShakeJar">🫙 Lắc hũ</button>
+              <button class="btn ghost" id="btnShakeJar">↻ Lắc hũ</button>
             </div>
           </div>
         </div>
@@ -298,6 +302,12 @@
         </p>
 
         <div class="game">
+          <div class="progressWrap">
+            <div class="progressText" id="gameProgressText">Tiến độ: sẵn sàng bắt tim 💗</div>
+            <div class="progressBar" aria-hidden="true">
+              <div class="progressFill" id="gameProgressFill"></div>
+            </div>
+          </div>
           <div class="gameTop">
             <div class="score" id="score">Điểm: 0</div>
             <div class="rank" id="rank">Danh hiệu: Chưa chơi</div>
@@ -513,12 +523,23 @@
     const playfield = document.getElementById('playfield');
     const scoreEl = document.getElementById('score');
     const rankEl = document.getElementById('rank');
+    const gameProgressText = document.getElementById('gameProgressText');
+    const gameProgressFill = document.getElementById('gameProgressFill');
     let playing = false;
     let score = 0;
     let spawner = null;
 
     let secretUnlocked = false;
     const secretBox = document.getElementById('secretBox');
+    const PROGRESS_TARGET = 30;
+
+    function updateGameProgress(s){
+      const pct = Math.min(100, (s / PROGRESS_TARGET) * 100);
+      gameProgressFill.style.width = pct + '%';
+      gameProgressText.textContent = s >= PROGRESS_TARGET
+        ? 'Hoàn thành! Em đã đạt 30/30 tim và mở bí mật 💌'
+        : `Tiến độ mở bí mật: ${s}/${PROGRESS_TARGET} tim`;
+    }
 
     function setRank(s){
       const ranks = [
@@ -535,12 +556,9 @@
     }
 
     function milestoneCheck(s){
-      if(s === 10) showModal("🎁 Mốc 10 tim!", "Em giỏi quá! Anh tặng em 1 cái ôm online 🤭");
-      if(s === 20) showModal("🎁 Mốc 20 tim!", "Tới đây là siêu đỉnh rồi đó! Anh thương em thêm 20 lần 💞");
       if(s === 30){
         secretUnlocked = true;
         secretBox.classList.add('show');
-        showModal("🔐 Mốc 30 tim!", "Em đã mở được <b>bí mật</b> trong tấm thiệp 💌 (kéo xuống phần thiệp để xem)");
         document.getElementById('letterCard').scrollIntoView({behavior:'smooth', block:'start'});
         burstConfetti(36);
         // TODO: Anh tự chỉnh nội dung bí mật ở secretBox
@@ -580,6 +598,7 @@
         hit = true;
         score++;
         scoreEl.textContent = "Điểm: " + score;
+        updateGameProgress(score);
         setRank(score);
         popAt(x, ev.offsetY, "✨");
         burstConfetti(8);
@@ -600,10 +619,11 @@
       playing = true;
       score = 0;
       scoreEl.textContent = "Điểm: 0";
+      updateGameProgress(0);
       setRank(0);
       spawner = setInterval(spawnTapHeart, 420);
       spawnTapHeart();
-      showModal("❤️ Bắt tim", "Bắt đầu rồi đó! Bấm tim liên tục nha em 😆");
+      gameProgressText.textContent = "Game đã bắt đầu! Bắt tim liên tục nha em 😆";
     }
 
     function stopGame(){
@@ -611,7 +631,7 @@
       if(spawner) clearInterval(spawner);
       spawner = null;
       [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
-      showModal("✅ Dừng game", `Em vừa bắt được <b>${score}</b> tim. Anh cộng thêm <b>${score}</b> lần thương em nữa 💗`);
+      gameProgressText.textContent = `Đã dừng game. Thành tích cuối: ${score} tim 💗`;
       burstConfetti(22);
     }
 
