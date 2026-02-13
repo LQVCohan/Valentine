@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine 14/02 💘</title>
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ffe3ed;
+      --card:#ffffffcc;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --pink:#ff4d8d;
+      --pink2:#ff86b4;
+      --shadow: 0 18px 55px rgba(255, 77, 141, .22);
+      --shadow2: 0 14px 40px rgba(31, 41, 55, .12);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 30% 0%, #ffd1e4 0%, transparent 60%),
+        radial-gradient(900px 500px at 70% 15%, #ffe7f1 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* floating hearts background */
+    .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+    .heart{
+      position:absolute;
+      width:14px;height:14px;
+      transform:rotate(45deg);
+      opacity:.22;
+      animation: floatUp linear infinite;
+      filter: blur(.15px);
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:14px;height:14px;
+      background:var(--pink);
+      border-radius:50%;
+    }
+    .heart{background:var(--pink)}
+    .heart:before{left:-7px; top:0}
+    .heart:after{left:0; top:-7px}
+    @keyframes floatUp{
+      from{transform: translateY(110vh) rotate(45deg); }
+      to{transform: translateY(-20vh) rotate(45deg); }
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width:980px;
+      margin:0 auto;
+      padding:24px 16px 48px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:999px;
+      background:var(--card);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:34px; height:34px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--pink), var(--pink2));
+      box-shadow: 0 12px 26px rgba(255,77,141,.25);
+      color:white;
+      font-size:18px;
+    }
+    .tiny{color:var(--muted); font-weight:600; font-size:13px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+
+    .btn{
+      border:0;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:750;
+      transition: transform .08s ease, filter .12s ease;
+      user-select:none;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{filter:brightness(1.02)}
+    .btn:active{transform: translateY(1px) scale(.99)}
+    .btn.primary{
+      color:white;
+      background:linear-gradient(135deg, var(--pink), var(--pink2));
+      box-shadow: 0 14px 30px rgba(255,77,141,.26);
+    }
+    .btn.ghost{
+      background:#fff;
+      color:var(--text);
+      box-shadow: 0 10px 26px rgba(31,41,55,.10);
+    }
+
+    .hero{
+      margin-top:18px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, #fff, #fff6fb);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:0;
+    }
+    @media (max-width: 820px){
+      .hero{grid-template-columns:1fr}
+    }
+    .hero .left{
+      padding:22px 22px 18px;
+    }
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 12px;
+      background:#ffe1ef;
+      border-radius:999px;
+      font-weight:800;
+      color:#9a1f52;
+      font-size:13px;
+    }
+    h1{
+      margin:12px 0 8px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.05;
+      letter-spacing:-.5px;
+    }
+    .sub{
+      color:var(--muted);
+      font-weight:600;
+      font-size:15px;
+      line-height:1.5;
+      margin:0 0 14px;
+    }
+    .chips{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin:14px 0 0;
+    }
+    .chip{
+      background:#fff;
+      border:1px solid #ffd0e2;
+      padding:7px 10px;
+      border-radius:999px;
+      font-weight:750;
+      font-size:13px;
+      color:#8a1747;
+    }
+    .hero .right{
+      position:relative;
+      min-height:280px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background:
+        radial-gradient(240px 240px at 40% 35%, rgba(255,77,141,.20) 0%, transparent 60%),
+        radial-gradient(220px 220px at 70% 70%, rgba(255,134,180,.22) 0%, transparent 62%),
+        linear-gradient(135deg, #fff0f7, #fff);
+    }
+    .bigHeart{
+      width:min(290px, 75vw);
+      aspect-ratio:1/1;
+      position:relative;
+      filter: drop-shadow(0 24px 48px rgba(255,77,141,.28));
+      animation: pulse 1.65s ease-in-out infinite;
+    }
+    .bigHeart:before,.bigHeart:after{
+      content:"";
+      position:absolute;
+      width:50%; height:50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      border-radius:50%;
+      top:20%; left:25%;
+    }
+    .bigHeart:after{left:0; top:0; transform: translate(25%, 20%)}
+    .bigHeart .sq{
+      position:absolute;
+      inset:0;
+      margin:auto;
+      width:62%; height:62%;
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      transform: rotate(45deg);
+      border-radius:16px;
+      top:18%;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.04)}
+    }
+    .heroNote{
+      position:absolute;
+      bottom:14px; left:14px; right:14px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(255,77,141,.22);
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:700;
+      color:#8a1747;
+      box-shadow: 0 10px 26px rgba(31,41,55,.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 820px){.grid{grid-template-columns:1fr}}
+    .card{
+      background: var(--card);
+      border:1px solid rgba(255,77,141,.14);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+    }
+    .card h2{
+      margin:0 0 6px;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .card p{margin:0; color:var(--muted); font-weight:600; line-height:1.5; font-size:14px}
+
+    /* Gallery */
+    .gallery{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 520px){.gallery{grid-template-columns: repeat(2, 1fr)}}
+    .shot{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+      border-radius: 16px;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow: 0 12px 26px rgba(31,41,55,.10);
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      background:#fff;
+    }
+    .shot:hover{transform: translateY(-2px) scale(1.01); filter:saturate(1.03)}
+    .shot:active{transform: translateY(0) scale(.995)}
+
+    /* Candy jar */
+    .jarWrap{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .jar{
+      width:150px; height:190px;
+      position:relative;
+    }
+    .jar svg{width:100%; height:100%}
+    .candyLine{
+      display:flex; flex-direction:column; gap:10px;
+      flex: 1;
+      min-width: 240px;
+    }
+    .candyOut{
+      background:#fff;
+      border:1px dashed rgba(255,77,141,.35);
+      border-radius: 16px;
+      padding:12px 12px;
+      font-weight:800;
+      color:#8a1747;
+      min-height:56px;
+      display:flex; align-items:center;
+    }
+    .shake{
+      animation: shake .4s ease-in-out 1;
+    }
+    @keyframes shake{
+      0%,100%{transform:rotate(0deg)}
+      25%{transform:rotate(-3deg)}
+      50%{transform:rotate(3deg)}
+      75%{transform:rotate(-2deg)}
+    }
+
+    /* Mini game */
+    .game{
+      margin-top:10px;
+      background:#fff;
+      border:1px solid rgba(255,77,141,.18);
+      border-radius: 16px;
+      padding:12px;
+    }
+    .gameTop{
+      display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .score{
+      font-weight:900;
+      color:#8a1747;
+      background:#ffe7f1;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .playfield{
+      position:relative;
+      height:240px;
+      border-radius:14px;
+      overflow:hidden;
+      background: radial-gradient(240px 120px at 30% 30%, #ffe5f0, #fff);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .tapHeart{
+      position:absolute;
+      width:28px; height:28px;
+      transform: rotate(45deg);
+      cursor:pointer;
+      animation: fall linear forwards;
+    }
+    .tapHeart:before,.tapHeart:after{
+      content:"";
+      position:absolute;
+      width:28px;height:28px;
+      background:var(--pink);
+      border-radius:50%;
+    }
+    .tapHeart{background:var(--pink)}
+    .tapHeart:before{left:-14px; top:0}
+    .tapHeart:after{left:0; top:-14px}
+    @keyframes fall{
+      from{transform: translateY(-40px) rotate(45deg); opacity:.95}
+      to{transform: translateY(280px) rotate(45deg); opacity:.15}
+    }
+
+    /* Modal */
+    .modal{position:fixed; inset:0; display:none; z-index:50;}
+    .modal.show{display:block}
+    .backdrop{
+      position:absolute; inset:0;
+      background: rgba(17,24,39,.48);
+      backdrop-filter: blur(6px);
+    }
+    .dialog{
+      position:relative;
+      width:min(520px, calc(100vw - 26px));
+      margin: min(11vh, 90px) auto 0;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,77,141,.18);
+      border-radius: 22px;
+      box-shadow: 0 35px 90px rgba(17,24,39,.25);
+      padding:16px 16px 14px;
+      animation: pop .14s ease-out;
+    }
+    @keyframes pop{from{transform:translateY(6px) scale(.99); opacity:.0} to{transform:translateY(0) scale(1); opacity:1}}
+    .dialogTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+    }
+    .dialog h3{
+      margin:6px 0 6px;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .close{
+      border:0;
+      width:38px; height:38px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:18px;
+      background:#fff;
+      box-shadow: 0 12px 26px rgba(31,41,55,.10);
+    }
+    .dialog .content{
+      color:var(--muted);
+      font-weight:650;
+      line-height:1.55;
+      font-size:14px;
+      padding:8px 2px 10px;
+    }
+    .dialog .content ul{margin:8px 0 0 18px}
+    .dialog .foot{
+      display:flex; justify-content:flex-end; gap:10px; padding-top:6px;
+    }
+
+    /* Confetti */
+    .confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:60;
+      display:none;
+    }
+    .confetti.show{display:block}
+    .piece{
+      position:absolute;
+      width:10px; height:14px;
+      opacity:.9;
+      transform: rotate(10deg);
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall{
+      from{transform: translateY(-20px) rotate(0deg); opacity:1}
+      to{transform: translateY(110vh) rotate(740deg); opacity:.9}
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="bgHearts" aria-hidden="true"></div>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="badge">💘</div>
+        <div>
+          <div>Valentine 14/02</div>
+          <div class="tiny">Gửi em yêu — từ <b>anh</b> ❤️</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
+        <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Lời chúc">
+      <div class="left">
+        <div class="kicker">✨ Một chiếc web nhỏ cho em</div>
+        <h1>Chúc em một Valentine thật ngọt ngào 💞</h1>
+        <p class="sub">
+          Anh làm trang này để em vừa xem ảnh, vừa chơi vài trò “cute phô mai que”,
+          và quan trọng nhất là… để em biết rằng <b>anh thương em rất nhiều</b>.
+        </p>
+        <div class="actions" style="justify-content:flex-start">
+          <button class="btn primary" id="btnLoveQuiz">🧠 Quiz tình yêu</button>
+          <button class="btn ghost" id="btnCandy">🍬 Hũ kẹo lời khen</button>
+          <button class="btn ghost" id="btnGame">❤️ Bắt tim</button>
+        </div>
+        <div class="chips">
+          <span class="chip">#em_là_đặc_biệt</span>
+          <span class="chip">#anh_luôn_ở_đây</span>
+          <span class="chip">#hôm_nay_em_xinh</span>
+        </div>
+      </div>
+      <div class="right">
+        <div class="bigHeart" aria-hidden="true"><div class="sq"></div></div>
+        <div class="heroNote">Tip: bấm “Mở quà” để nhận bất ngờ nho nhỏ 😚</div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="galleryCard">
+        <h2>📸 Album “Em là yêu thương”</h2>
+        <p>6 tấm ảnh đã được cắt gọn (không dính thanh trạng thái / chữ). Bấm vào ảnh để phóng to nhé.</p>
+        <div class="gallery" id="gallery">
+          <img class="shot" src="Ảnh/01.jpg" alt="Ảnh 1" data-full="Ảnh/01.jpg">
+          <img class="shot" src="Ảnh/02.jpg" alt="Ảnh 2" data-full="Ảnh/02.jpg">
+          <img class="shot" src="Ảnh/03.jpg" alt="Ảnh 3" data-full="Ảnh/03.jpg">
+          <img class="shot" src="Ảnh/04.jpg" alt="Ảnh 4" data-full="Ảnh/04.jpg">
+          <img class="shot" src="Ảnh/05.jpg" alt="Ảnh 5" data-full="Ảnh/05.jpg">
+          <img class="shot" src="Ảnh/06.jpg" alt="Ảnh 6" data-full="Ảnh/06.jpg">
+        </div>
+      </div>
+
+      <div class="card" id="candyCard">
+        <h2>🍬 Hũ kẹo lời khen (phiên bản “trông như thật”)</h2>
+        <p>Bốc 1 viên kẹo là nhận 1 lời khen. Lắc hũ là kẹo “rơi lộp bộp” trong tim anh 😳</p>
+
+        <div class="jarWrap">
+          <div class="jar" id="jar">
+            <!-- a "real-ish" glass jar in SVG (offline friendly) -->
+            <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Hũ kẹo">
+              <defs>
+                <linearGradient id="gGlass" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+                  <stop offset=".55" stop-color="#ffffff" stop-opacity=".35"/>
+                  <stop offset="1" stop-color="#ffffff" stop-opacity=".75"/>
+                </linearGradient>
+                <linearGradient id="gLid" x1="0" x2="1">
+                  <stop offset="0" stop-color="#ff4d8d"/>
+                  <stop offset="1" stop-color="#ff86b4"/>
+                </linearGradient>
+                <linearGradient id="gShine" x1="0" x2="1">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".0"/>
+                  <stop offset=".35" stop-color="#fff" stop-opacity=".65"/>
+                  <stop offset="1" stop-color="#fff" stop-opacity=".0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- lid -->
+              <rect x="50" y="18" rx="16" ry="16" width="100" height="34" fill="url(#gLid)"/>
+              <rect x="58" y="8" rx="18" ry="18" width="84" height="24" fill="url(#gLid)" opacity=".92"/>
+
+              <!-- glass body -->
+              <path d="M55 58
+                       C50 80, 45 110, 48 160
+                       C51 206, 74 222, 100 224
+                       C126 222, 149 206, 152 160
+                       C155 110, 150 80, 145 58
+                       Z"
+                    fill="url(#gGlass)" stroke="rgba(255,77,141,.35)" stroke-width="2"/>
+
+              <!-- candies inside -->
+              <g opacity=".95">
+                <circle cx="78" cy="115" r="12" fill="#ff4d8d"/>
+                <circle cx="110" cy="130" r="12" fill="#ff86b4"/>
+                <circle cx="92" cy="150" r="12" fill="#ff4d8d"/>
+                <circle cx="120" cy="155" r="12" fill="#ffd1e4"/>
+                <circle cx="78" cy="170" r="12" fill="#ff86b4"/>
+                <circle cx="108" cy="178" r="12" fill="#ff4d8d"/>
+              </g>
+
+              <!-- shine -->
+              <path d="M78 66 C64 98, 62 130, 64 164 C66 192, 76 208, 84 214"
+                    fill="none" stroke="url(#gShine)" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+
+              <!-- base shadow -->
+              <ellipse cx="100" cy="232" rx="60" ry="10" fill="rgba(31,41,55,.10)"/>
+            </svg>
+          </div>
+
+          <div class="candyLine">
+            <div class="candyOut" id="candyOut">Bấm “Bốc kẹo” đi em 😚</div>
+            <div class="actions" style="justify-content:flex-start">
+              <button class="btn primary" id="btnPickCandy">🍬 Bốc kẹo</button>
+              <button class="btn ghost" id="btnShakeJar">🫙 Lắc hũ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="quizCard">
+        <h2>🧠 Quiz tình yêu</h2>
+        <p>Trả lời nhanh cho vui. Cuối quiz có “phần thưởng” nha!</p>
+        <div class="actions" style="justify-content:flex-start; margin-top:10px">
+          <button class="btn primary" id="btnStartQuiz">Bắt đầu</button>
+        </div>
+      </div>
+
+      <div class="card" id="gameCard">
+        <h2>❤️ Mini game: Bắt tim</h2>
+        <p>Bấm vào những trái tim rơi xuống để ghi điểm. (Mỗi tim = +1 yêu thương)</p>
+
+        <div class="game">
+          <div class="gameTop">
+            <div class="score" id="score">Điểm: 0</div>
+            <div class="actions" style="justify-content:flex-start">
+              <button class="btn primary" id="btnPlay">Chơi</button>
+              <button class="btn ghost" id="btnStop">Dừng</button>
+            </div>
+          </div>
+          <div class="playfield" id="playfield" aria-label="Khu vực chơi"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="card" style="margin-top:14px">
+      <h2>💌 Lời nhắn cuối</h2>
+      <p>
+        Nếu hôm nay em mệt, buồn, hay chỉ đơn giản là muốn được ôm… cứ nói anh nhé.
+        Anh sẽ chạy tới (nhanh hơn cả Wi‑Fi nhà em) 😆
+      </p>
+      <p style="margin-top:10px">
+        <b>Happy Valentine!</b> — Anh thương em 💗
+      </p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="backdrop" id="modalBackdrop"></div>
+    <div class="dialog" role="document">
+      <div class="dialogTop">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="close" id="modalClose" aria-label="Đóng">✕</button>
+      </div>
+      <div class="content" id="modalBody"></div>
+      <div class="foot">
+        <button class="btn primary" id="modalOk">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgm" preload="auto" loop>
+    <!-- Nếu em muốn nhạc, có thể thay file mp3 vào cùng thư mục và sửa src -->
+  </audio>
+
+  <script>
+    // ----------------------------
+    // Cute background hearts
+    // ----------------------------
+    (function spawnBgHearts(){
+      const wrap = document.getElementById('bgHearts');
+      const n = 18;
+      for(let i=0;i<n;i++){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        const left = Math.random()*100;
+        const dur = 10 + Math.random()*16;
+        const delay = Math.random()*-20;
+        const size = 10 + Math.random()*14;
+        h.style.left = left + 'vw';
+        h.style.animationDuration = dur + 's';
+        h.style.animationDelay = delay + 's';
+        h.style.width = size + 'px';
+        h.style.height = size + 'px';
+        wrap.appendChild(h);
+      }
+    })();
+
+    // ----------------------------
+    // Modal helper (replaces alert())
+    // ----------------------------
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody  = document.getElementById('modalBody');
+    const modalOk    = document.getElementById('modalOk');
+    const modalClose = document.getElementById('modalClose');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+
+    function showModal(title, html){
+      modalTitle.textContent = title || "Thông báo";
+      modalBody.innerHTML = html || "";
+      modal.classList.add('show');
+      // focus
+      setTimeout(()=>modalOk.focus(), 10);
+    }
+    function hideModal(){
+      modal.classList.remove('show');
+    }
+    modalOk.addEventListener('click', hideModal);
+    modalClose.addEventListener('click', hideModal);
+    modalBackdrop.addEventListener('click', hideModal);
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && modal.classList.contains('show')) hideModal();
+    });
+
+    // Surprise button
+    document.getElementById('btnSurprise').addEventListener('click', ()=>{
+      showModal("🎁 Bất ngờ nè!", `
+        <div style="font-weight:800;color:#8a1747;margin-bottom:6px">Bé iu, em chính thức nhận được:</div>
+        <ul>
+          <li>1 cái ôm thật chặt</li>
+          <li>1 bữa ăn ngon</li>
+          <li>Và 1 người thương em rất nhiều 🥰</li>
+        </ul>
+        <div style="margin-top:10px;color:#6b7280;font-weight:650">Gợi ý: thử “Hũ kẹo lời khen” với “Quiz tình yêu” nữa nha!</div>
+      `);
+      burstConfetti();
+    });
+
+    // ----------------------------
+    // Gallery (click -> modal)
+    // ----------------------------
+    document.getElementById('gallery').addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      const src = img.getAttribute('data-full');
+      showModal("📸 Ảnh của em", `<img src="${src}" alt="Ảnh" style="width:100%;border-radius:16px;border:1px solid rgba(0,0,0,.06)" />`);
+    });
+
+    // ----------------------------
+    // Candy jar (compliments)
+    // ----------------------------
+    const compliments = [
+      "Hôm nay em xinh quá trời luôn 🫶",
+      "Nụ cười của em làm anh mềm tim 😳",
+      "Ở cạnh em, mọi thứ đều nhẹ nhàng hơn 💗",
+      "Em đáng yêu kiểu… không ai đỡ nổi 🥺",
+      "Em là điều may mắn nhất của anh 🍀",
+      "Giọng em nghe là thấy bình yên rồi 😚",
+      "Em vừa đẹp vừa giỏi, ai mà không mê!",
+      "Anh thương em nhiều hơn cả hôm qua (mà hôm qua đã nhiều lắm rồi) 💞",
+      "Em là “nhà” của anh, dù anh ở đâu 🏡",
+      "Em ơi, em làm anh nhớ em quá 🥰",
+    ];
+    const candyOut = document.getElementById('candyOut');
+    const jar = document.getElementById('jar');
+
+    document.getElementById('btnPickCandy').addEventListener('click', ()=>{
+      const msg = compliments[Math.floor(Math.random()*compliments.length)];
+      candyOut.textContent = msg;
+      burstConfetti(18);
+    });
+
+    document.getElementById('btnShakeJar').addEventListener('click', ()=>{
+      jar.classList.remove('shake');
+      void jar.offsetWidth; // reflow
+      jar.classList.add('shake');
+      const msg = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
+      candyOut.textContent = msg;
+    });
+
+    // shortcut from hero button
+    document.getElementById('btnCandy').addEventListener('click', ()=>{
+      document.getElementById('candyCard').scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=>showModal("🍬 Hũ kẹo lời khen", "Kéo xuống một chút là thấy hũ kẹo nha em 😚"), 450);
+    });
+
+    // ----------------------------
+    // Quiz
+    // ----------------------------
+    const quiz = [
+      { q: "Khi em buồn, anh nên làm gì trước?", a: ["Ôm em thật chặt", "Im lặng cho em tự xử", "Chơi game tiếp"], correct: 0 },
+      { q: "Món “quà” anh muốn tặng em nhất là…", a: ["Thời gian + sự quan tâm", "Một cái hứa thật chắc", "Cả hai (tất nhiên!)"], correct: 2 },
+      { q: "Em thích kiểu hẹn hò nào?", a: ["Đi ăn ngon", "Đi dạo + nói chuyện", "Ở nhà xem phim"], correct: 1 },
+      { q: "Ai là người đáng yêu nhất vũ trụ?", a: ["Em", "Em", "Em"], correct: 0 },
+      { q: "Chọn câu đúng:", a: ["Anh thương em", "Anh thương em rất nhiều", "Anh thương em vô hạn"], correct: 2 },
+    ];
+
+    function runQuiz(){
+      let idx = 0;
+      let score = 0;
+
+      function render(){
+        const item = quiz[idx];
+        const buttons = item.a.map((txt,i)=>`
+          <button class="btn ${i===0?'primary':'ghost'}" data-i="${i}" style="width:100%; justify-content:center">
+            ${txt}
+          </button>
+        `).join('<div style="height:10px"></div>');
+
+        showModal(`🧠 Quiz (${idx+1}/${quiz.length})`, `
+          <div style="font-weight:900;color:#8a1747">${item.q}</div>
+          <div style="height:12px"></div>
+          <div style="display:grid; gap:10px">${buttons}</div>
+          <div style="margin-top:10px;font-weight:700;color:#6b7280">Điểm hiện tại: ${score}</div>
+        `);
+
+        // attach handlers after modal content update
+        [...modalBody.querySelectorAll('button[data-i]')].forEach(b=>{
+          b.addEventListener('click', ()=>{
+            const chosen = Number(b.getAttribute('data-i'));
+            if(chosen === item.correct) score++;
+            idx++;
+            if(idx >= quiz.length){
+              finish();
+            }else{
+              render();
+            }
+          });
+        });
+      }
+
+      function finish(){
+        burstConfetti();
+        showModal("🎉 Kết quả!", `
+          <div style="font-weight:900;color:#8a1747">Em đạt ${score}/${quiz.length} điểm!</div>
+          <div style="margin-top:8px">
+            <b>Phần thưởng:</b> 1 cái ôm + 1 nụ hôn (nếu em cho phép 😳) + 1 lời nhắn:
+          </div>
+          <div style="margin-top:10px;background:#fff;border:1px solid rgba(255,77,141,.2);border-radius:16px;padding:12px;font-weight:800;color:#8a1747">
+            “Em là điều anh trân trọng nhất. Cảm ơn em vì đã ở đây.” 💗
+          </div>
+        `);
+      }
+
+      render();
+    }
+
+    document.getElementById('btnStartQuiz').addEventListener('click', runQuiz);
+    document.getElementById('btnLoveQuiz').addEventListener('click', ()=>{
+      document.getElementById('quizCard').scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(runQuiz, 450);
+    });
+
+    // ----------------------------
+    // Mini game: click falling hearts
+    // ----------------------------
+    const playfield = document.getElementById('playfield');
+    const scoreEl = document.getElementById('score');
+    let playing = false;
+    let score = 0;
+    let spawner = null;
+
+    function spawnTapHeart(){
+      const h = document.createElement('div');
+      h.className = 'tapHeart';
+      const x = Math.random()*(playfield.clientWidth - 28);
+      const dur = 1.3 + Math.random()*1.4;
+      h.style.left = x + 'px';
+      h.style.animationDuration = dur + 's';
+      h.addEventListener('click', ()=>{
+        score++;
+        scoreEl.textContent = "Điểm: " + score;
+        h.remove();
+      });
+      h.addEventListener('animationend', ()=> h.remove());
+      playfield.appendChild(h);
+    }
+
+    function startGame(){
+      if(playing) return;
+      playing = true;
+      score = 0;
+      scoreEl.textContent = "Điểm: 0";
+      spawner = setInterval(spawnTapHeart, 420);
+      spawnTapHeart();
+      showModal("❤️ Bắt tim", "Bắt đầu rồi đó! Bấm tim liên tục nha em 😆");
+    }
+    function stopGame(){
+      playing = false;
+      if(spawner) clearInterval(spawner);
+      spawner = null;
+      // clear field
+      [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
+      showModal("✅ Dừng game", `Em vừa bắt được <b>${score}</b> tim. Anh cộng thêm <b>${score}</b> lần thương em nữa 💗`);
+      burstConfetti(22);
+    }
+
+    document.getElementById('btnPlay').addEventListener('click', startGame);
+    document.getElementById('btnStop').addEventListener('click', stopGame);
+    document.getElementById('btnGame').addEventListener('click', ()=>{
+      document.getElementById('gameCard').scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(startGame, 450);
+    });
+
+    // ----------------------------
+    // Music toggle (optional)
+    // ----------------------------
+    const bgm = document.getElementById('bgm');
+    let musicOn = false;
+    const btnMusic = document.getElementById('btnMusic');
+
+    btnMusic.addEventListener('click', async ()=>{
+      // This is intentionally "optional": user can add a mp3 and set bgm.src.
+      if(!bgm.src){
+        showModal("🎵 Nhạc nền", `
+          <div>Trang hiện chưa có file nhạc.</div>
+          <div style="margin-top:8px">
+            Nếu em muốn có nhạc:
+            <ul>
+              <li>Chép file <b>music.mp3</b> vào cùng thư mục với <b>valentine.html</b></li>
+              <li>Mở file và sửa: <code>bgm.src = "music.mp3"</code></li>
+            </ul>
+          </div>
+        `);
+        return;
+      }
+
+      try{
+        if(!musicOn){
+          await bgm.play();
+          musicOn = true;
+          btnMusic.textContent = "⏸️ Tắt nhạc";
+        }else{
+          bgm.pause();
+          musicOn = false;
+          btnMusic.textContent = "🎵 Bật nhạc";
+        }
+      }catch{
+        showModal("⚠️ Không bật được nhạc", "Trình duyệt có thể chặn autoplay. Em bấm lại lần nữa nha 😚");
+      }
+    });
+
+    // ----------------------------
+    // Confetti
+    // ----------------------------
+    function burstConfetti(count=26){
+      const layer = document.getElementById('confetti');
+      layer.innerHTML = "";
+      layer.classList.add('show');
+
+      const colors = ["#ff4d8d","#ff86b4","#ffd1e4","#ffe1ef","#ffb3d2"];
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+
+      for(let i=0;i<count;i++){
+        const p = document.createElement('div');
+        p.className = 'piece';
+        p.style.left = Math.random()*W + "px";
+        p.style.top = (-20 - Math.random()*H*0.2) + "px";
+        p.style.background = colors[Math.floor(Math.random()*colors.length)];
+        p.style.animationDuration = (2.2 + Math.random()*1.8) + "s";
+        p.style.animationDelay = (Math.random()*0.15) + "s";
+        p.style.borderRadius = (2 + Math.random()*4) + "px";
+        layer.appendChild(p);
+        p.addEventListener('animationend', ()=> p.remove());
+      }
+
+      setTimeout(()=> layer.classList.remove('show'), 2800);
+    }
+  </script>
+</body>
+</html>
