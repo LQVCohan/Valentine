@@ -226,6 +226,7 @@
       <div class="actions">
         <button class="btn primary" id="btnSurprise">🎁 Mở quà</button>
         <button class="btn ghost" id="btnMusic">🎵 Bật nhạc</button>
+        <button class="btn ghost" id="btnReset">♻️ Reset</button>
       </div>
     </header>
 
@@ -434,6 +435,7 @@
 
   <script>
     const CARD_PASSWORD = "CohanXGinn";
+    const PROGRESS_STORAGE_KEY = "valentine_progress_v2";
 
     (function spawnBgHearts(){
       const wrap = document.getElementById('bgHearts');
@@ -512,6 +514,8 @@
 
     let quizPassed = false;
     let gameGoalReached = false;
+    let bestHeartScore = 0;
+    let letterOpened = false;
 
     const reqPw = document.getElementById('reqPw');
     const reqQuiz = document.getElementById('reqQuiz');
@@ -528,6 +532,34 @@
       markReq(reqQuiz, quizPassed, 'Hoàn thành quiz tối thiểu 4/5');
       markReq(reqCandy, hasCandyKey, 'Lắc hũ tới khi rơi được chìa khóa');
       markReq(reqGame, gameGoalReached, 'Bắt tim đạt mốc cuối (30/30)');
+    }
+
+    function saveProgress(){
+      const payload = {
+        hasCandyKey,
+        shakeCount,
+        quizPassed,
+        gameGoalReached,
+        bestHeartScore,
+        letterOpened,
+      };
+      localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(payload));
+    }
+
+    function loadProgress(){
+      const raw = localStorage.getItem(PROGRESS_STORAGE_KEY);
+      if(!raw) return;
+      try{
+        const data = JSON.parse(raw);
+        hasCandyKey = Boolean(data.hasCandyKey);
+        shakeCount = Number.isFinite(data.shakeCount) ? Math.max(0, data.shakeCount) : 0;
+        quizPassed = Boolean(data.quizPassed);
+        gameGoalReached = Boolean(data.gameGoalReached);
+        bestHeartScore = Number.isFinite(data.bestHeartScore) ? Math.max(0, data.bestHeartScore) : 0;
+        letterOpened = Boolean(data.letterOpened);
+      }catch{
+        localStorage.removeItem(PROGRESS_STORAGE_KEY);
+      }
     }
 
     refreshUnlockChecklist(false);
@@ -549,6 +581,7 @@
         candyOut.textContent = "Lắc lắc… kẹo rơi ra: " + compliments[Math.floor(Math.random()*compliments.length)];
       }
       refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+      saveProgress();
     });
     document.getElementById('btnCandy').addEventListener('click', ()=>{
       document.getElementById('candyCard').scrollIntoView({behavior:'smooth', block:'start'});
@@ -589,6 +622,7 @@
       function finish(){
         quizPassed = qscore >= 4;
         refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+        saveProgress();
         burstConfetti();
         showModal("🎉 Kết quả!", `
           <div style="font-weight:900;color:#8a1747">Em đạt ${qscore}/${quiz.length} điểm!</div>
@@ -622,12 +656,13 @@
     const secretBox = document.getElementById('secretBox');
     const PROGRESS_TARGET = 30;
 
-    function updateGameProgress(s){
-      const pct = Math.min(100, (s / PROGRESS_TARGET) * 100);
+    function updateGameProgress(s, {persistAchievement = true} = {}){
+      if(persistAchievement && s >= PROGRESS_TARGET) gameGoalReached = true;
+      const visual = gameGoalReached ? PROGRESS_TARGET : s;
+      const pct = Math.min(100, (visual / PROGRESS_TARGET) * 100);
       gameProgressFill.style.width = pct + '%';
-      gameGoalReached = s >= PROGRESS_TARGET;
       refreshUnlockChecklist(pw.value === CARD_PASSWORD);
-      gameProgressText.textContent = s >= PROGRESS_TARGET
+      gameProgressText.textContent = gameGoalReached
         ? 'Hoàn thành! Em đã đạt 30/30 tim và mở bí mật 💌'
         : `Tiến độ mở bí mật: ${s}/${PROGRESS_TARGET} tim`;
     }
@@ -652,6 +687,7 @@
         secretBox.classList.add('show');
         document.getElementById('letterCard').scrollIntoView({behavior:'smooth', block:'start'});
         burstConfetti(36);
+        saveProgress();
         // TODO: Anh tự chỉnh nội dung bí mật ở secretBox
       }
     }
@@ -688,12 +724,14 @@
       h.addEventListener('click', (ev)=>{
         hit = true;
         score++;
+        bestHeartScore = Math.max(bestHeartScore, score);
         scoreEl.textContent = "Điểm: " + score;
         updateGameProgress(score);
         setRank(score);
         popAt(x, ev.offsetY, "✨");
         burstConfetti(8);
         milestoneCheck(score);
+        saveProgress();
         h.remove();
       });
 
@@ -710,7 +748,7 @@
       playing = true;
       score = 0;
       scoreEl.textContent = "Điểm: 0";
-      updateGameProgress(0);
+      updateGameProgress(0, {persistAchievement:false});
       setRank(0);
       spawner = setInterval(spawnTapHeart, 420);
       spawnTapHeart();
@@ -724,6 +762,7 @@
       [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
       gameProgressText.textContent = `Đã dừng game. Thành tích cuối: ${score} tim 💗`;
       burstConfetti(22);
+      saveProgress();
     }
 
     document.getElementById('btnPlay').addEventListener('click', startGame);
@@ -745,6 +784,8 @@
       if(isPwOk && quizPassed && hasCandyKey && gameGoalReached){
         letter.classList.add('open');
         envelope.classList.add('opened');
+        letterOpened = true;
+        saveProgress();
         burstConfetti(20);
         showModal("💌 Mở thiệp thành công", "Anh biết em làm được mà 😚");
       } else {
@@ -753,6 +794,56 @@
     });
     pw.addEventListener('input', ()=>refreshUnlockChecklist(pw.value === CARD_PASSWORD));
     pw.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') document.getElementById('btnOpenLetter').click(); });
+
+    function applyProgressToUi(){
+      if(hasCandyKey) candyOut.textContent = "🔑 Em đã có chìa khóa rồi, mở thư thôi nào!";
+      scoreEl.textContent = "Điểm: " + bestHeartScore;
+      setRank(bestHeartScore);
+      updateGameProgress(bestHeartScore, {persistAchievement:false});
+      if(gameGoalReached){
+        secretUnlocked = true;
+        secretBox.classList.add('show');
+      }
+      if(letterOpened){
+        letter.classList.add('open');
+        envelope.classList.add('opened');
+      }
+      refreshUnlockChecklist(pw.value === CARD_PASSWORD);
+    }
+
+    function resetProgress(){
+      playing = false;
+      if(spawner) clearInterval(spawner);
+      spawner = null;
+      [...playfield.querySelectorAll('.tapHeart')].forEach(n=>n.remove());
+      hasCandyKey = false;
+      shakeCount = 0;
+      quizPassed = false;
+      gameGoalReached = false;
+      bestHeartScore = 0;
+      letterOpened = false;
+      secretUnlocked = false;
+      score = 0;
+      candyOut.textContent = "Bấm “Bốc kẹo” đi em 😚";
+      gameProgressFill.style.width = '0%';
+      gameProgressText.textContent = 'Tiến độ: sẵn sàng bắt tim 💗';
+      scoreEl.textContent = 'Điểm: 0';
+      setRank(0);
+      secretBox.classList.remove('show');
+      letter.classList.remove('open');
+      envelope.classList.remove('opened');
+      pw.value = '';
+      localStorage.removeItem(PROGRESS_STORAGE_KEY);
+      refreshUnlockChecklist(false);
+    }
+
+    document.getElementById('btnReset').addEventListener('click', ()=>{
+      showModal('♻️ Reset thành tích', 'Đã reset toàn bộ tiến độ lưu trên máy này. Bắt đầu lại từ đầu nha em 💗');
+      resetProgress();
+    });
+
+    loadProgress();
+    applyProgressToUi();
 
     const bgm = document.getElementById('bgm');
     let musicOn = false;
