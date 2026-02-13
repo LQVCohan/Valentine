@@ -624,7 +624,7 @@
       <div class="backdrop" id="modalBackdrop"
         style="position:absolute;inset:0;"></div>
       <div class="dialog" role="document"
-        style="position:relative;width:min(500px, 90vw);margin:15vh auto 0;padding:30px;animation:popd .3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+        style="position:relative;width:min(500px, 90vw);margin:5vh auto 0;padding:30px;animation:popd .3s cubic-bezier(0.34, 1.56, 0.64, 1);">
         <div class="dialogTop"
           style="display:flex;justify-content:space-between;margin-bottom:15px;align-items:center">
           <h3 id="modalTitle" style="margin:0">Modal</h3>
@@ -808,7 +808,7 @@
       if(!img) return;
       playSfx('pop');
       const src = img.getAttribute('data-full');
-      showModal("📸 image của em", `<img src="${src}" alt="image" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />`);
+      showModal("📸 Ảnh của em", `<img src="${src}" alt="image" style="width:100%;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)" />`);
     });
 
     const compliments = [
